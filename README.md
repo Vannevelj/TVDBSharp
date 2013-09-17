@@ -45,3 +45,11 @@ Output:
 > Battlestar Galactica:     71173  
 > Battlestar Galactica: Blood & Chrome:     204781  
 > Battlestar Galactica \<2003\> :     73545  
+
+**Notes**  
+If you encounter any issues or have a suggestion: don't hesitate to open a ticket.  
+Should you wish to do so, you can contact me at `jer_vannevel<at>hotmail.com`.
+
+Other networking sites:  
+[StackOverflow] (http://stackoverflow.com/users/1864167/jeroen-vannevel)  
+[Careers 2.0] (http://careers.stackoverflow.com/Vannevelj)  
