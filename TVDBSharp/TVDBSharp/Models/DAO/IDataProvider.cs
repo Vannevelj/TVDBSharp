@@ -2,7 +2,7 @@
 
 namespace TVDBSharp.Models.DAO {
     /// <summary>
-    /// Defines a Dataprovider
+    /// Defines a Dataprovider API.
     /// </summary>
     public interface IDataProvider {
         /// <summary>

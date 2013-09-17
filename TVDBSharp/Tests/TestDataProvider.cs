@@ -18,7 +18,7 @@ namespace Tests {
         /// <summary>
         /// Initializes a new instance with the provided testing data.
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">Mocking data of type <see cref="TestData"/>.</param>
         public TestDataProvider(TestData data) {
             _data = data;
         }

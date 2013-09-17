@@ -73,7 +73,7 @@ namespace TVDBSharp.Models {
         public int? RatingCount { get; set; }
 
         /// <summary>
-        /// No clue
+        /// Let me know if you find out what this is.
         /// </summary>
         public int? Runtime { get; set; }
 
@@ -103,7 +103,7 @@ namespace TVDBSharp.Models {
         public long? LastUpdated { get; set; }
 
         /// <summary>
-        /// No clue
+        /// Let me know if you find out what this is.
         /// </summary>
         public string Poster { get; set; }
 

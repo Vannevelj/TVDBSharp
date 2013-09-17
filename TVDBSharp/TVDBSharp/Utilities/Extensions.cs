@@ -22,7 +22,6 @@ namespace TVDBSharp.Utilities {
                     if (result != null) {
                         return result.Value;
                     }
-
                     throw new XmlSchemaException("Could not find element <" + element + ">");
                 }
                 throw new XmlSchemaException("Could not find element <Series>");
@@ -33,9 +32,9 @@ namespace TVDBSharp.Utilities {
         /// <summary>
         /// Retrieves a value from an XML tree.
         /// </summary>
-        /// <param name="xmlObject">The given XML tree.</param>
+        /// <param name="xmlObject">The given XML (sub)tree.</param>
         /// <param name="element">Name of the element with the data.</param>
-        /// <returns>Return the value corresponding to the given element name;</returns>
+        /// <returns>Returns the value corresponding to the given element name;</returns>
         /// <exception cref="XmlSchemaException">Thrown when the element doesn't exist.</exception>
         public static string GetXmlData(this XElement xmlObject, string element) {
             var result = xmlObject.Element(element);

@@ -19,9 +19,14 @@ namespace Tests {
         }
 
         /// <summary>
-        /// Used to create an XML tree where the XML element names are represented by the key-XML value and the XML values are represented by the value-XML value.
-        /// After using the TVDB builders: check if the resulting object's properties (key-Object value) has the same values as the value-Object value.
-        /// Key-Object value and value-Object value refer to respectively the dictionary's key and the corresponding value.
+        /// Used to create an XML tree where the XML element names are represented
+        /// by the key-XML value and the XML values are represented by the value-XML value.
+        ///
+        /// After using the TVDB builders: check if the resulting object's properties
+        /// (key-Object value) has the same values as the value-Object value.
+        ///
+        /// Key-Object value and value-Object value refer to
+        /// respectively the dictionary's key and the corresponding value.
         /// </summary>
         public TestData() {
             AddShowData();
@@ -78,7 +83,6 @@ namespace Tests {
             newEpisode.Add(new Conversion("thumb_width", "ThumbWidth"), new Conversion("400", "400"));
             newEpisode.Add(new Conversion("tms_export", "TmsExport"), new Conversion("1374789754", "1374789754"));
             _episodeData.Add(newEpisode);
-
             #endregion FirstEpisode
 
             #region SecondEpisode

@@ -9,7 +9,7 @@
         Ended,
 
         /// <summary>
-        /// Default value if no status is given.
+        /// Default value if no status is specified.
         /// </summary>
         Unknown
     }

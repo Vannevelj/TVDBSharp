@@ -24,10 +24,15 @@ namespace Tests {
         }
 
         /// <summary>
-        /// Test the retrieval of a show. A <see cref="TestShow"/> object is created to accurately represent the XML tree of a show.
-        /// Afterwards the <see cref="TVDBSharp.Models.Builder"/> is called to parse this into a <see cref="TVDBSharp.Models.Show"/> object.
+        /// Test the retrieval of a show. A <see cref="TestShow"/> object is created
+        /// to accurately represent the XML tree of a show.
+        ///
+        /// Afterwards the <see cref="TVDBSharp.Models.Builder"/> is called
+        /// to parse this into a <see cref="TVDBSharp.Models.Show"/> object.
+        ///
         /// This process includes creating <see cref="TVDBSharp.Models.Episode"/> objects.
-        /// Finally every property is being tested to have the expected outcome as detailed in <see cref="TestData"/>.
+        /// Finally every property is being tested to have the expected outcome a
+        /// as detailed in <see cref="TestData"/>.
         /// </summary>
         [TestMethod]
         public void GetShow() {

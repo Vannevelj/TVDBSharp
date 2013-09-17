@@ -7,10 +7,10 @@ namespace TVDBSharp {
     /// The main class which will handle all user interaction.
     /// </summary>
     public class TVDB {
-        private IDataProvider _dataProvider;
+        private readonly IDataProvider _dataProvider;
 
         /// <summary>
-        /// Creates a new instance with the provided apikey.
+        /// Creates a new instance with the provided API key and dataProvider.
         /// </summary>
         /// <param name="apiKey">The API key provided by TVDB.</param>
         /// <param name="dataProvider">Specify your own <see cref="IDataProvider"/> instance.</param>
@@ -20,7 +20,7 @@ namespace TVDBSharp {
         }
 
         /// <summary>
-        /// Creates a new instance with the standard <see cref="IDataProvider"/>.
+        /// Creates a new instance with the provided API key and standard <see cref="IDataProvider"/>.
         /// </summary>
         /// <param name="apiKey">The API key provided by TVDB.</param>
         public TVDB(string apiKey) {

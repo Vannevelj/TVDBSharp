@@ -14,7 +14,7 @@ namespace TVDBSharp.Models {
         /// <summary>
         /// Director of the episode.
         /// </summary>
-        public string Director { get; set; } // TODO: List?
+        public string Director { get; set; }
 
         /// <summary>
         /// This episode's title.
@@ -72,7 +72,7 @@ namespace TVDBSharp.Models {
         public List<String> Writers { get; set; }
 
         /// <summary>
-        /// No fucking clue.
+        /// Let me know if you find out what this is.
         /// </summary>
         public string FileName { get; set; }
 
@@ -102,7 +102,7 @@ namespace TVDBSharp.Models {
         public int? ThumbWidth { get; set; }
 
         /// <summary>
-        /// No clue.
+        /// Let me know if you find out what this is.
         /// </summary>
         public string TmsExport { get; set; }
     }

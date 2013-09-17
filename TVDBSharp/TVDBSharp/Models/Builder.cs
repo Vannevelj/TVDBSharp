@@ -16,23 +16,23 @@ namespace TVDBSharp.Models {
         /// <summary>
         /// Initializes a new Builder object with the given <see cref="IDataProvider"/>.
         /// </summary>
-        /// <param name="dataProvider"></param>
+        /// <param name="dataProvider">The DataProvider used to retrieve XML responses.</param>
         public Builder(IDataProvider dataProvider) {
             _dataProvider = dataProvider;
         }
 
         /// <summary>
-        /// Builds a show object from the given <c>XDocument</c>.
+        /// Builds a show object from the given show ID.
         /// </summary>
         /// <param name="showID">ID of the show to serialize into a <see cref="Show"/> object.</param>
-        /// <returns>Returns a the Show object.</returns>
+        /// <returns>Returns the Show object.</returns>
         public Show BuildShow(string showID) {
             var builder = new ShowBuilder(_dataProvider.GetShow(showID));
             return builder.GetResult();
         }
 
         /// <summary>
-        /// Returns a list of <see cref="Show"/> objects that match the query.
+        /// Returns a list of <see cref="Show"/> objects that match the given query.
         /// </summary>
         /// <param name="query">Query the search is performed with.</param>
         /// <param name="results">Maximal amount of shows the resultset should return.</param>
