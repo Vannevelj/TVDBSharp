@@ -35,7 +35,7 @@ Look trough the examples project if you aren't entirely sure how to get started.
 A simple example:
 
     var tvdb = new TVDB("mykey"); // Create a new TVDB object with your API key.
-    var results = tvdb.Search("Battlestar Galactica", 3); // Search for series called "Battlestar Galactica" and take the top-3.
+    var results = tvdb.Search("Battlestar Galactica", 3); // Search for a series and take the top-3.
     
     foreach(var show in results){
      Console.WriteLine("{0}:\t{1}", show.Name, show.ID); // Print every show's name and ID
