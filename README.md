@@ -37,5 +37,5 @@ A simple example:
     var results = tvdb.Search("Suits", 3); // Search for series called "Suits" and take the top-3.
     
     foreach(var show in results){
-     Console.WriteLine({0}:\t{1}, show.Name, show.ID); // Print every show's name and ID
+     Console.WriteLine("{0}:\t{1}", show.Name, show.ID); // Print every show's name and ID
     }
