@@ -7,7 +7,7 @@ namespace Tests.Models {
     /// </summary>
     public class TestShow {
 #pragma warning disable 1591 // Disables XML warnings
-        public string SeriesID { get; set; }
+        public string id { get; set; }
         public string Actors { get; set; }
         public string Airs_DayOfWeek { get; set; }
         public string Airs_Time { get; set; }

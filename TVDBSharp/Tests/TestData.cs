@@ -35,7 +35,7 @@ namespace Tests {
 
         private void AddShowData() {
             #region ShowData
-            _showData.Add(new Conversion("SeriesID", "ID"), new Conversion("76290", "76290"));
+            _showData.Add(new Conversion("id", "ID"), new Conversion("76290", "76290"));
             _showData.Add(new Conversion("IMDB_ID", "ImdbID"), new Conversion("tt0285331", "tt0285331"));
             _showData.Add(new Conversion("Language", "Language"), new Conversion("en", "en"));
             _showData.Add(new Conversion("Actors", "Actors"), new Conversion("|Kiefer Sutherland|Carlos Bernard|Mary Lynn Rajskub|", new List<String>(new[] { "Kiefer Sutherland", "Carlos Bernard", "Mary Lynn Rajskub" }).ToString()));

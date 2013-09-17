@@ -54,45 +54,44 @@ namespace TVDBSharp.Models {
             private Show _show;
 
             public ShowBuilder(XDocument doc) {
-                _show = new Show {
-                    ID = doc.GetSeriesData("SeriesID"),
-                    ImdbID = doc.GetSeriesData("IMDB_ID"),
-                    Name = doc.GetSeriesData("SeriesName"),
-                    Language = doc.GetSeriesData("Language"),
-                    Network = doc.GetSeriesData("Network"),
-                    Description = doc.GetSeriesData("Overview"),
-                    Rating = string.IsNullOrWhiteSpace(doc.GetSeriesData("Rating"))
-                                 ? (double?) null
-                                 : Convert.ToDouble(doc.GetSeriesData("Rating"),
-                                                    System.Globalization.CultureInfo.InvariantCulture),
-                    RatingCount = string.IsNullOrWhiteSpace(doc.GetSeriesData("RatingCount"))
-                                      ? (int?) null
-                                      : Convert.ToInt32(doc.GetSeriesData("RatingCount")),
-                    Runtime = string.IsNullOrWhiteSpace(doc.GetSeriesData("Runtime"))
-                                  ? (int?) null
-                                  : Convert.ToInt32(doc.GetSeriesData("Runtime")),
-                    Banner = doc.GetSeriesData("banner"),
-                    Fanart = doc.GetSeriesData("fanart"),
-                    LastUpdated = string.IsNullOrWhiteSpace(doc.GetSeriesData("lastupdated"))
-                                      ? 0L
-                                      : Convert.ToInt64(doc.GetSeriesData("lastupdated")),
-                    Poster = doc.GetSeriesData("poster"),
-                    Zap2ItID = doc.GetSeriesData("zap2it_id"),
-                    FirstAired = Utils.ParseDate(doc.GetSeriesData("FirstAired")),
-                    AirTime = string.IsNullOrWhiteSpace(doc.GetSeriesData("Airs_Time"))
-                                  ? (TimeSpan?) null
-                                  : Utils.ParseTime(doc.GetSeriesData("Airs_Time")),
-                    AirDay = string.IsNullOrWhiteSpace(doc.GetSeriesData("Airs_DayOfWeek"))
-                                 ? (DayOfWeek?) null
-                                 : (DayOfWeek) Enum.Parse(typeof(DayOfWeek), doc.GetSeriesData("Airs_DayOfWeek")),
-                    Status = string.IsNullOrWhiteSpace(doc.GetSeriesData("Status"))
-                                 ? (Status?) null
-                                 : (Status) Enum.Parse(typeof(Status), doc.GetSeriesData("Status")),
-                    ContentRating = Utils.GetContentRating(doc.GetSeriesData("ContentRating")),
-                    Genres = new List<string>(doc.GetSeriesData("Genre").Split('|')),
-                    Actors = new List<string>(doc.GetSeriesData("Actors").Split('|')),
-                    Episodes = new EpisodeBuilder(doc).BuildEpisodes()
-                };
+                _show = new Show();
+                _show.ID = doc.GetSeriesData("id");
+                _show.ImdbID = doc.GetSeriesData("IMDB_ID");
+                _show.Name = doc.GetSeriesData("SeriesName");
+                _show.Language = doc.GetSeriesData("Language");
+                _show.Network = doc.GetSeriesData("Network");
+                _show.Description = doc.GetSeriesData("Overview");
+                _show.Rating = string.IsNullOrWhiteSpace(doc.GetSeriesData("Rating"))
+                                   ? (double?) null
+                                   : Convert.ToDouble(doc.GetSeriesData("Rating"),
+                                                      System.Globalization.CultureInfo.InvariantCulture);
+                _show.RatingCount = string.IsNullOrWhiteSpace(doc.GetSeriesData("RatingCount"))
+                                        ? (int?) null
+                                        : Convert.ToInt32(doc.GetSeriesData("RatingCount"));
+                _show.Runtime = string.IsNullOrWhiteSpace(doc.GetSeriesData("Runtime"))
+                                    ? (int?) null
+                                    : Convert.ToInt32(doc.GetSeriesData("Runtime"));
+                _show.Banner = doc.GetSeriesData("banner");
+                _show.Fanart = doc.GetSeriesData("fanart");
+                _show.LastUpdated = string.IsNullOrWhiteSpace(doc.GetSeriesData("lastupdated"))
+                                        ? 0L
+                                        : Convert.ToInt64(doc.GetSeriesData("lastupdated"));
+                _show.Poster = doc.GetSeriesData("poster");
+                _show.Zap2ItID = doc.GetSeriesData("zap2it_id");
+                _show.FirstAired = Utils.ParseDate(doc.GetSeriesData("FirstAired"));
+                _show.AirTime = string.IsNullOrWhiteSpace(doc.GetSeriesData("Airs_Time"))
+                                    ? (TimeSpan?) null
+                                    : Utils.ParseTime(doc.GetSeriesData("Airs_Time"));
+                _show.AirDay = string.IsNullOrWhiteSpace(doc.GetSeriesData("Airs_DayOfWeek"))
+                                   ? (DayOfWeek?) null
+                                   : (DayOfWeek) Enum.Parse(typeof(DayOfWeek), doc.GetSeriesData("Airs_DayOfWeek"));
+                _show.Status = string.IsNullOrWhiteSpace(doc.GetSeriesData("Status"))
+                                   ? (Status?) null
+                                   : (Status) Enum.Parse(typeof(Status), doc.GetSeriesData("Status"));
+                _show.ContentRating = Utils.GetContentRating(doc.GetSeriesData("ContentRating"));
+                _show.Genres = new List<string>(doc.GetSeriesData("Genre").Split('|'));
+                _show.Actors = new List<string>(doc.GetSeriesData("Actors").Split('|'));
+                _show.Episodes = new EpisodeBuilder(doc).BuildEpisodes();
             }
 
             public Show GetResult() {

@@ -9,6 +9,11 @@
         Ended,
 
         /// <summary>
+        /// The show is ongoing.
+        /// </summary>
+        Continuing,
+
+        /// <summary>
         /// Default value if no status is specified.
         /// </summary>
         Unknown
