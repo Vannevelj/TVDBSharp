@@ -35,13 +35,21 @@ Look trough the examples project if you aren't entirely sure how to get started.
 A simple example:
 
     var tvdb = new TVDB("mykey"); // Create a new TVDB object with your API key.
-    var results = tvdb.Search("Battlestar Galactica", 3); // Search for series called "Suits" and take the top-3.
+    var results = tvdb.Search("Battlestar Galactica", 3); // Search for a show and take the top-3.
     
     foreach(var show in results){
-     Console.WriteLine("{0}:\t{1}", show.Name, show.ID); // Print every show's name and ID
+     Console.WriteLine("{0}:\t{1}", show.Name, show.ID); // Print every show's name and ID.
     }
     
 Output:
 > Battlestar Galactica:     71173  
 > Battlestar Galactica: Blood & Chrome:     204781  
 > Battlestar Galactica \<2003\> :     73545  
+
+**Notes**  
+If you encounter any issues or have a suggestion: don't hesitate to open a ticket.  
+Should you wish to do so, you can contact me at `jer_vannevel<at>hotmail.com`.
+
+Other networking sites:  
+[StackOverflow] (http://stackoverflow.com/users/1864167/jeroen-vannevel)  
+[Careers 2.0] (http://careers.stackoverflow.com/Vannevelj)  
