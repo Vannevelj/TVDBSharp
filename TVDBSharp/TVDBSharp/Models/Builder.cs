@@ -66,7 +66,7 @@ namespace TVDBSharp.Models {
                                    : Convert.ToDouble(doc.GetSeriesData("Rating"),
                                                       System.Globalization.CultureInfo.InvariantCulture);
                 _show.RatingCount = string.IsNullOrWhiteSpace(doc.GetSeriesData("RatingCount"))
-                                        ? (int?) null
+                                        ? 0
                                         : Convert.ToInt32(doc.GetSeriesData("RatingCount"));
                 _show.Runtime = string.IsNullOrWhiteSpace(doc.GetSeriesData("Runtime"))
                                     ? (int?) null
@@ -74,7 +74,7 @@ namespace TVDBSharp.Models {
                 _show.Banner = doc.GetSeriesData("banner");
                 _show.Fanart = doc.GetSeriesData("fanart");
                 _show.LastUpdated = string.IsNullOrWhiteSpace(doc.GetSeriesData("lastupdated"))
-                                        ? 0L
+                                        ? (long?) null
                                         : Convert.ToInt64(doc.GetSeriesData("lastupdated"));
                 _show.Poster = doc.GetSeriesData("poster");
                 _show.Zap2ItID = doc.GetSeriesData("zap2it_id");
@@ -86,7 +86,7 @@ namespace TVDBSharp.Models {
                                    ? (DayOfWeek?) null
                                    : (DayOfWeek) Enum.Parse(typeof(DayOfWeek), doc.GetSeriesData("Airs_DayOfWeek"));
                 _show.Status = string.IsNullOrWhiteSpace(doc.GetSeriesData("Status"))
-                                   ? (Status?) null
+                                   ? Status.Unknown
                                    : (Status) Enum.Parse(typeof(Status), doc.GetSeriesData("Status"));
                 _show.ContentRating = Utils.GetContentRating(doc.GetSeriesData("ContentRating"));
                 _show.Genres = new List<string>(doc.GetSeriesData("Genre").Split('|'));
@@ -138,7 +138,7 @@ namespace TVDBSharp.Models {
                                                    System.Globalization.CultureInfo.InvariantCulture),
                         RatingCount =
                             string.IsNullOrWhiteSpace(episode.GetXmlData("RatingCount"))
-                                ? (int?) null
+                                ? 0
                                 : Convert.ToInt32(episode.GetXmlData("RatingCount")),
                         SeasonID = episode.GetXmlData("seasonid"),
                         SeasonNumber =

@@ -70,7 +70,7 @@ namespace TVDBSharp.Models {
         /// <summary>
         /// Amount of votes cast.
         /// </summary>
-        public int? RatingCount { get; set; }
+        public int RatingCount { get; set; }
 
         /// <summary>
         /// Let me know if you find out what this is.
@@ -85,7 +85,7 @@ namespace TVDBSharp.Models {
         /// <summary>
         /// Current status of the show.
         /// </summary>
-        public Status? Status { get; set; }
+        public Status Status { get; set; }
 
         /// <summary>
         /// Link to the banner image.

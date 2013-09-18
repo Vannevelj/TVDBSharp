@@ -10,15 +10,19 @@ namespace TVDBSharp.Models.DAO {
         public string ApiKey { get; set; }
 
         public XDocument GetShow(string showID) {
-            var web = new WebClient();
-            var response = web.DownloadString(new StringBuilder("http://thetvdb.com/api/").Append(ApiKey).Append("/series/").Append(showID).Append("/all/").ToString());
-            return XDocument.Parse(response);
+            using (var web = new WebClient()) {
+                var response = web.DownloadString(new StringBuilder("http://thetvdb.com/api/").Append(ApiKey).Append("/series/").Append(showID).Append("/all/").ToString());
+                return XDocument.Parse(response);
+            }
         }
 
         public XDocument Search(string query) {
-            var web = new WebClient();
-            var response = web.DownloadString(new StringBuilder("http://thetvdb.com/api/GetSeries.php?seriesname=").Append(query).ToString());
-            return XDocument.Parse(response);
+            using (var web = new WebClient()) {
+                var response =
+                    web.DownloadString(
+                        new StringBuilder("http://thetvdb.com/api/GetSeries.php?seriesname=").Append(query).ToString());
+                return XDocument.Parse(response);
+            }
         }
     }
 }

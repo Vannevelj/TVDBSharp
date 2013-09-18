@@ -64,7 +64,7 @@ namespace TVDBSharp.Models {
         /// <summary>
         /// Amount of votes cast.
         /// </summary>
-        public int? RatingCount { get; set; }
+        public int RatingCount { get; set; }
 
         /// <summary>
         /// Writers(s) of the episode.
