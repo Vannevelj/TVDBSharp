@@ -89,8 +89,8 @@ namespace TVDBSharp.Models {
                                    ? Status.Unknown
                                    : (Status) Enum.Parse(typeof(Status), doc.GetSeriesData("Status"));
                 _show.ContentRating = Utils.GetContentRating(doc.GetSeriesData("ContentRating"));
-                _show.Genres = new List<string>(doc.GetSeriesData("Genre").Split('|'));
-                _show.Actors = new List<string>(doc.GetSeriesData("Actors").Split('|'));
+                _show.Genres = new List<string>(doc.GetSeriesData("Genre").Split('|', StringSplitOptions.RemoveEmptyEntries));
+                _show.Actors = new List<string>(doc.GetSeriesData("Actors").Split('|', StringSplitOptions.RemoveEmptyEntries));
                 _show.Episodes = new EpisodeBuilder(doc).BuildEpisodes();
             }
 
