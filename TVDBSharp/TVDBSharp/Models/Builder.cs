@@ -89,8 +89,8 @@ namespace TVDBSharp.Models {
                                    ? Status.Unknown
                                    : (Status) Enum.Parse(typeof(Status), doc.GetSeriesData("Status"));
                 _show.ContentRating = Utils.GetContentRating(doc.GetSeriesData("ContentRating"));
-                _show.Genres = new List<string>(doc.GetSeriesData("Genre").Split('|', StringSplitOptions.RemoveEmptyEntries));
-                _show.Actors = new List<string>(doc.GetSeriesData("Actors").Split('|', StringSplitOptions.RemoveEmptyEntries));
+                _show.Genres = new List<string>(doc.GetSeriesData("Genre").Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries));
+                _show.Actors = new List<string>(doc.GetSeriesData("Actors").Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries));
                 _show.Episodes = new EpisodeBuilder(doc).BuildEpisodes();
             }
 
@@ -124,7 +124,7 @@ namespace TVDBSharp.Models {
                             string.IsNullOrWhiteSpace(episode.GetXmlData("FirstAired"))
                                 ? (DateTime?) null
                                 : Utils.ParseDate(episode.GetXmlData("FirstAired")),
-                        GuestStars = new List<string>(episode.GetXmlData("GuestStars").Split('|')),
+                        GuestStars = new List<string>(episode.GetXmlData("GuestStars").Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries)),
                         ImdbID = episode.GetXmlData("IMDB_ID"),
                         Language = episode.GetXmlData("Language"),
                         LastUpdated =
@@ -155,7 +155,7 @@ namespace TVDBSharp.Models {
                                 ? (int?) null
                                 : Convert.ToInt32(episode.GetXmlData("thumb_width")),
                         TmsExport = episode.GetXmlData("tms_export"),
-                        Writers = new List<string>(episode.GetXmlData("Writer").Split('|'))
+                        Writers = new List<string>(episode.GetXmlData("Writer").Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries))
                     };
 
                     result.Add(ep);
