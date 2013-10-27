@@ -9,10 +9,10 @@ namespace Examples {
             var series = "Battlestar Galactica";
 
             var tvdb = new TVDB(apikey);
-            var result = tvdb.Search(series);
+            var result = tvdb.Search(series, 3);
 
             foreach (var show in result) {
-                Console.WriteLine(show.Name);
+                Console.WriteLine("{0}:\t{1}", show.Name, show.ID);
             }
 
             Console.ReadKey();

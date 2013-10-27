@@ -38,11 +38,14 @@ namespace TVDBSharp.Utilities {
         /// <exception cref="XmlSchemaException">Thrown when the element doesn't exist.</exception>
         public static string GetXmlData(this XElement xmlObject, string element) {
             var result = xmlObject.Element(element);
-            if (result != null) {
-                return result.Value;
-            }
 
-            throw new XmlSchemaException("Element <" + element + "> could not be found.");
+            return result != null ? result.Value : null;
+
+            // Removed in favor of returning a null value
+            // This will allow us to catch a non-existing tag with the null-coalescing operator
+            // Never trust the XML provider.
+
+            //throw new XmlSchemaException("Element <" + element + "> could not be found.");
         }
     }
 }
