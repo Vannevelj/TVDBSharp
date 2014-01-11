@@ -53,3 +53,4 @@ Should you wish to do so, you can contact me at `jer_vannevel<at>hotmail.com`.
 Other networking sites:  
 [StackOverflow] (http://stackoverflow.com/users/1864167/jeroen-vannevel)  
 [Careers 2.0] (http://careers.stackoverflow.com/Vannevelj)  
+[LinkedIn](http://www.linkedin.com/profile/view?id=289197145&trk=nav_responsive_tab_profile)  
