@@ -23,7 +23,7 @@ You don't have to do this, but some people might want to read up on the, althoug
 This can be done by either forking this repository and compiling it yourself 
 or by downloading the latest version from the link below.
 
-> https://mega.co.nz/#!kB1VBB6R!OVfokQ_OMAWE-7VBcos9HVYxH8JzuZjzgbIm5CVnIjc
+> https://mega.co.nz/#!AJk1jKYT!DIHtrhvf-ACfyFS37B6utBFuZLBRM0oWp1wEZepIdWk
 
 
 Add it as a reference to your project and you're all set.
