@@ -78,7 +78,9 @@ namespace TVDBSharp.Models {
                                         : Convert.ToInt64(doc.GetSeriesData("lastupdated"));
                 _show.Poster = doc.GetSeriesData("poster");
                 _show.Zap2ItID = doc.GetSeriesData("zap2it_id");
-                _show.FirstAired = Utils.ParseDate(doc.GetSeriesData("FirstAired"));
+                _show.FirstAired = string.IsNullOrWhiteSpace(doc.GetSeriesData("FirstAired"))
+                    ? (DateTime?) null :
+                    Utils.ParseDate(doc.GetSeriesData("FirstAired"));
                 _show.AirTime = string.IsNullOrWhiteSpace(doc.GetSeriesData("Airs_Time"))
                                     ? (TimeSpan?) null
                                     : Utils.ParseTime(doc.GetSeriesData("Airs_Time"));

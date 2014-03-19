@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using TVDBSharp.Models.Enums;
 
 namespace TVDBSharp.Utilities {
@@ -7,13 +8,15 @@ namespace TVDBSharp.Utilities {
     /// </summary>
     public static class Utils {
         /// <summary>
-        /// Parses a string of format yyyy-mm-dd to a <see cref="DateTime"/> object.
+        /// Parses a string of format yyyy-MM-dd to a <see cref="DateTime"/> object.
         /// </summary>
         /// <param name="value">String to be parsed.</param>
         /// <returns>Returns a <see cref="DateTime"/> representation.</returns>
-        public static DateTime ParseDate(string value) {
-            var date = value.Split('-');
-            return new DateTime(Convert.ToInt32(date[0]), Convert.ToInt32(date[1]), Convert.ToInt32(date[2]));
+        public static DateTime ParseDate(string value)
+        {
+            DateTime date;
+            DateTime.TryParseExact(value, "yyyy-MM-dd", CultureInfo.CurrentCulture, DateTimeStyles.AssumeLocal, out date);
+            return date;
         }
 
         /// <summary>

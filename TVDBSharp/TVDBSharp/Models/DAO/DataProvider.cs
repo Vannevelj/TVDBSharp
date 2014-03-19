@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using System.Text;
 using System.Xml.Linq;
 
 namespace TVDBSharp.Models.DAO {
@@ -11,16 +10,14 @@ namespace TVDBSharp.Models.DAO {
 
         public XDocument GetShow(string showID) {
             using (var web = new WebClient()) {
-                var response = web.DownloadString(new StringBuilder("http://thetvdb.com/api/").Append(ApiKey).Append("/series/").Append(showID).Append("/all/").ToString());
+                var response = web.DownloadString(string.Format("http://thetvdb.com/api/{0}/series/{1}/all/", ApiKey, showID));
                 return XDocument.Parse(response);
             }
         }
 
         public XDocument Search(string query) {
             using (var web = new WebClient()) {
-                var response =
-                    web.DownloadString(
-                        new StringBuilder("http://thetvdb.com/api/GetSeries.php?seriesname=").Append(query).ToString());
+                var response = web.DownloadString(string.Format("http://thetvdb.com/api/GetSeries.php?seriesname={0}", query));
                 return XDocument.Parse(response);
             }
         }
