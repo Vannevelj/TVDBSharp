@@ -85,8 +85,8 @@ namespace TVDBSharp.Models {
                                     ? (TimeSpan?) null
                                     : Utils.ParseTime(doc.GetSeriesData("Airs_Time"));
                 _show.AirDay = string.IsNullOrWhiteSpace(doc.GetSeriesData("Airs_DayOfWeek"))
-                                   ? (DayOfWeek?) null
-                                   : (DayOfWeek) Enum.Parse(typeof(DayOfWeek), doc.GetSeriesData("Airs_DayOfWeek"));
+                                   ? (Frequency?) null
+                                   : (Frequency)Enum.Parse(typeof(Frequency), doc.GetSeriesData("Airs_DayOfWeek"));
                 _show.Status = string.IsNullOrWhiteSpace(doc.GetSeriesData("Status"))
                                    ? Status.Unknown
                                    : (Status) Enum.Parse(typeof(Status), doc.GetSeriesData("Status"));

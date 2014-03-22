@@ -24,15 +24,15 @@ namespace TVDBSharp.Utilities {
         /// </summary>
         /// <param name="value">String to be parsed.</param>
         /// <returns>Returns a <see cref="TimeSpan"/> representation.</returns>
-        public static TimeSpan ParseTime(string value) {
-            var hour = Convert.ToInt32(value.Substring(0, value.IndexOf(':')));
-            var minute = Convert.ToInt32(value.Substring(value.IndexOf(':') + 1, 2));
-            var daypart = value.Substring(value.Length - 2);
-            if (daypart == "PM") {
-                hour += 12;
-            }
+        public static TimeSpan ParseTime(string value)
+        {
+            DateTime date;
 
-            return new TimeSpan(hour, minute, 0);
+            if (!DateTime.TryParse(value, out date))
+            {
+                return new TimeSpan();
+            }
+            return date.TimeOfDay;
         }
 
         /// <summary>

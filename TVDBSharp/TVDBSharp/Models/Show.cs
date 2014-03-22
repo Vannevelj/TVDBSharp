@@ -25,7 +25,7 @@ namespace TVDBSharp.Models {
         /// <summary>
         /// Day of the week when the show airs.
         /// </summary>
-        public DayOfWeek? AirDay { get; set; }
+        public Frequency? AirDay { get; set; }
 
         /// <summary>
         /// Time of the day when the show airs.
