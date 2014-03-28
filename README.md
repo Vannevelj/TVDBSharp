@@ -1,6 +1,8 @@
 TVDBSharp
 =========
 
+Now also available as a NuGet package at https://www.nuget.org/packages/TVDBSharp/
+
 **A C# wrapper for the TVDB API.**
 
 This API provides an easy-to-use interface to the TVDB API by translating the XML responses into objects. 
