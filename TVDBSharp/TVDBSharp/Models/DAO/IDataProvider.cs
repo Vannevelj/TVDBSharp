@@ -18,6 +18,14 @@ namespace TVDBSharp.Models.DAO {
         XDocument GetShow(string showID);
 
         /// <summary>
+        /// Retrieves the episode with the given id and returns the corresponding XML tree.
+        /// </summary>
+        /// <param name="episodeId">ID of the episode to retrieve</param>
+        /// <param name="lang">ISO 639-1 language code of the episode</param>
+        /// <returns>XML tree of the episode object</returns>
+        XDocument GetEpisode(int episodeId, string lang);
+
+        /// <summary>
         /// Returns an XML tree representing a search query for the given parameter.
         /// </summary>
         /// <param name="query">Query to perform the search with.</param>

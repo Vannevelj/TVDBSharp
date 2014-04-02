@@ -59,6 +59,11 @@ namespace Tests {
             return XDocument.Parse(xml);
         }
 
+        public XDocument GetEpisode(int episodeId, string lang)
+        {
+            throw new NotImplementedException();
+        }
+
         public XDocument Search(string query) {
             throw new NotImplementedException();
         }

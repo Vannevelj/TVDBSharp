@@ -45,5 +45,10 @@ namespace TVDBSharp {
         public Show GetShow(string showId) {
             return new Builder(_dataProvider).BuildShow(showId);
         }
+
+        public Episode GetEpisode(int episodeId, string lang = "en")
+        {
+            return new Builder(_dataProvider).BuildEpisode(episodeId, lang);
+        }
     }
 }

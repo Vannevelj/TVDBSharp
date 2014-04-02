@@ -31,6 +31,12 @@ namespace TVDBSharp.Models {
             return builder.GetResult();
         }
 
+        public Episode BuildEpisode(int episodeId, string lang)
+        {
+            var builder = new EpBuilder(_dataProvider.GetEpisode(episodeId, lang).Root);
+            return builder.GetResult();
+        }
+
         /// <summary>
         /// Returns a list of <see cref="Show"/> objects that match the given query.
         /// </summary>
@@ -98,6 +104,69 @@ namespace TVDBSharp.Models {
 
             public Show GetResult() {
                 return _show;
+            }
+        }
+
+        public class EpBuilder
+        {
+            private Episode _episode;
+
+            public EpBuilder(XElement elt)
+            {
+                var episodeNode = elt.DescendantsAndSelf("Episode").First();
+                _episode = new Episode
+                {
+                    ID = episodeNode.GetXmlData("id"),
+                    Title = episodeNode.GetXmlData("EpisodeName"),
+                    Description = episodeNode.GetXmlData("Overview"),
+                    EpisodeNumber =
+                        string.IsNullOrWhiteSpace(episodeNode.GetXmlData("EpisodeNumber"))
+                            ? (int?)null
+                            : Convert.ToInt32(episodeNode.GetXmlData("EpisodeNumber")),
+                    Director = episodeNode.GetXmlData("Director"),
+                    FileName = episodeNode.GetXmlData("filename"),
+                    FirstAired =
+                        string.IsNullOrWhiteSpace(episodeNode.GetXmlData("FirstAired"))
+                            ? (DateTime?)null
+                            : Utils.ParseDate(episodeNode.GetXmlData("FirstAired")),
+                    GuestStars = new List<string>(episodeNode.GetXmlData("GuestStars").Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries)),
+                    ImdbID = episodeNode.GetXmlData("IMDB_ID"),
+                    Language = episodeNode.GetXmlData("Language"),
+                    LastUpdated =
+                        string.IsNullOrWhiteSpace(episodeNode.GetXmlData("lastupdated"))
+                            ? 0L
+                            : Convert.ToInt64(episodeNode.GetXmlData("lastupdated")),
+                    Rating =
+                        string.IsNullOrWhiteSpace(episodeNode.GetXmlData("Rating"))
+                            ? (double?)null
+                            : Convert.ToDouble(episodeNode.GetXmlData("Rating"),
+                                               System.Globalization.CultureInfo.InvariantCulture),
+                    RatingCount =
+                        string.IsNullOrWhiteSpace(episodeNode.GetXmlData("RatingCount"))
+                            ? 0
+                            : Convert.ToInt32(episodeNode.GetXmlData("RatingCount")),
+                    SeasonID = episodeNode.GetXmlData("seasonid"),
+                    SeasonNumber =
+                        string.IsNullOrWhiteSpace(episodeNode.GetXmlData("SeasonNumber"))
+                            ? (int?)null
+                            : Convert.ToInt32(episodeNode.GetXmlData("SeasonNumber")),
+                    SeriesID = episodeNode.GetXmlData("seriesid"),
+                    ThumbHeight =
+                        string.IsNullOrWhiteSpace(episodeNode.GetXmlData("thumb_height"))
+                            ? (int?)null
+                            : Convert.ToInt32(episodeNode.GetXmlData("thumb_height")),
+                    ThumbWidth =
+                        string.IsNullOrWhiteSpace(episodeNode.GetXmlData("thumb_width"))
+                            ? (int?)null
+                            : Convert.ToInt32(episodeNode.GetXmlData("thumb_width")),
+                    TmsExport = episodeNode.GetXmlData("tms_export"),
+                    Writers = new List<string>(episodeNode.GetXmlData("Writer").Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries))
+                };
+            }
+
+            public Episode GetResult()
+            {
+                return _episode;
             }
         }
 
