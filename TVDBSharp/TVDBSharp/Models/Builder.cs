@@ -33,7 +33,7 @@ namespace TVDBSharp.Models {
 
         public Episode BuildEpisode(int episodeId, string lang)
         {
-            var builder = new EpBuilder(_dataProvider.GetEpisode(episodeId, lang).Root);
+            var builder = new EpisodeBuilder(_dataProvider.GetEpisode(episodeId, lang).Descendants("Episode").First());
             return builder.GetResult();
         }
 
@@ -99,7 +99,7 @@ namespace TVDBSharp.Models {
                 _show.ContentRating = Utils.GetContentRating(doc.GetSeriesData("ContentRating"));
                 _show.Genres = new List<string>(doc.GetSeriesData("Genre").Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries));
                 _show.Actors = new List<string>(doc.GetSeriesData("Actors").Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries));
-                _show.Episodes = new EpisodeBuilder(doc).BuildEpisodes();
+                _show.Episodes = new EpisodesBuilder(doc).BuildEpisodes();
             }
 
             public Show GetResult() {
@@ -107,13 +107,12 @@ namespace TVDBSharp.Models {
             }
         }
 
-        public class EpBuilder
+        public class EpisodeBuilder
         {
             private Episode _episode;
 
-            public EpBuilder(XElement elt)
+            public EpisodeBuilder(XElement episodeNode)
             {
-                var episodeNode = elt.DescendantsAndSelf("Episode").First();
                 _episode = new Episode
                 {
                     ID = episodeNode.GetXmlData("id"),
@@ -170,66 +169,20 @@ namespace TVDBSharp.Models {
             }
         }
 
-        private class EpisodeBuilder {
+        private class EpisodesBuilder {
             private XDocument _doc;
 
-            public EpisodeBuilder(XDocument doc) {
+            public EpisodesBuilder(XDocument doc) {
                 _doc = doc;
             }
 
             public List<Episode> BuildEpisodes() {
                 var result = new List<Episode>();
 
-                foreach (var episode in _doc.Descendants("Episode")) {
-                    var ep = new Episode {
-                        ID = episode.GetXmlData("id"),
-                        Title = episode.GetXmlData("EpisodeName"),
-                        Description = episode.GetXmlData("Overview"),
-                        EpisodeNumber =
-                            string.IsNullOrWhiteSpace(episode.GetXmlData("EpisodeNumber"))
-                                ? (int?) null
-                                : Convert.ToInt32(episode.GetXmlData("EpisodeNumber")),
-                        Director = episode.GetXmlData("Director"),
-                        FileName = episode.GetXmlData("filename"),
-                        FirstAired =
-                            string.IsNullOrWhiteSpace(episode.GetXmlData("FirstAired"))
-                                ? (DateTime?) null
-                                : Utils.ParseDate(episode.GetXmlData("FirstAired")),
-                        GuestStars = new List<string>(episode.GetXmlData("GuestStars").Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries)),
-                        ImdbID = episode.GetXmlData("IMDB_ID"),
-                        Language = episode.GetXmlData("Language"),
-                        LastUpdated =
-                            string.IsNullOrWhiteSpace(episode.GetXmlData("lastupdated"))
-                                ? 0L
-                                : Convert.ToInt64(episode.GetXmlData("lastupdated")),
-                        Rating =
-                            string.IsNullOrWhiteSpace(episode.GetXmlData("Rating"))
-                                ? (double?) null
-                                : Convert.ToDouble(episode.GetXmlData("Rating"),
-                                                   System.Globalization.CultureInfo.InvariantCulture),
-                        RatingCount =
-                            string.IsNullOrWhiteSpace(episode.GetXmlData("RatingCount"))
-                                ? 0
-                                : Convert.ToInt32(episode.GetXmlData("RatingCount")),
-                        SeasonID = episode.GetXmlData("seasonid"),
-                        SeasonNumber =
-                            string.IsNullOrWhiteSpace(episode.GetXmlData("SeasonNumber"))
-                                ? (int?) null
-                                : Convert.ToInt32(episode.GetXmlData("SeasonNumber")),
-                        SeriesID = episode.GetXmlData("seriesid"),
-                        ThumbHeight =
-                            string.IsNullOrWhiteSpace(episode.GetXmlData("thumb_height"))
-                                ? (int?) null
-                                : Convert.ToInt32(episode.GetXmlData("thumb_height")),
-                        ThumbWidth =
-                            string.IsNullOrWhiteSpace(episode.GetXmlData("thumb_width"))
-                                ? (int?) null
-                                : Convert.ToInt32(episode.GetXmlData("thumb_width")),
-                        TmsExport = episode.GetXmlData("tms_export"),
-                        Writers = new List<string>(episode.GetXmlData("Writer").Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries))
-                    };
-
-                    result.Add(ep);
+                foreach (var episodeNode in _doc.Descendants("Episode"))
+                {
+                    var episode = new EpisodeBuilder(episodeNode).GetResult();
+                    result.Add(episode);
                 }
 
                 return result;
