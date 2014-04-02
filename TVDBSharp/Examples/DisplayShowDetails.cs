@@ -9,7 +9,7 @@ namespace Examples {
         /// </summary>
         public DisplayShowDetails() {
             var apikey = ConfigurationManager.AppSettings["apikey"]; // Your own API key
-            var seriesid = "76290";
+            var seriesid = "83882";
 
             var tvdb = new TVDB(apikey);
             var result = tvdb.GetShow(seriesid);
