@@ -203,8 +203,9 @@ namespace TVDBSharp.Models {
             {
                 if (doc.Root != null)
                 {
-                    _updates = new Updates()
+                    _updates = new Updates
                     {
+                        Time = int.Parse(doc.Root.Attribute("time").Value),
                         UpdatedSeries = doc.Root.Elements("Series")
                             .Select(elt => new UpdatedSerie()
                             {

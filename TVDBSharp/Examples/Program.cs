@@ -37,8 +37,8 @@ namespace Examples {
             Console.WriteLine("-----------");*/
 
             // Get updates of the last 24 hours
-            Console.WriteLine("Updates during the last 24 hours on thetvdb");
             var updates = tvdb.GetUpdates(Interval.Day);
+            Console.WriteLine("Updates during the last 24 hours on thetvdb, since {0}", updates.Timestamp);
             DisplayUpdates.Print(updates);
 
             Console.ReadKey();
