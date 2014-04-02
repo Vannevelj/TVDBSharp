@@ -12,7 +12,7 @@ namespace Examples {
 
             // Retrieve and display Game of Thrones
             Console.WriteLine("Game of Thrones");
-            var got = tvdb.GetShow("121361");
+            var got = tvdb.GetShow(121361);
             DisplayShowDetails.Print(got);
             Console.WriteLine("-----------");
 
@@ -24,7 +24,7 @@ namespace Examples {
 
             // Retrieve and display episode titles for Game of Thrones season 2
             Console.WriteLine("Episodes of Game of Thrones season 2");
-            var show = tvdb.GetShow("121361");
+            var show = tvdb.GetShow(121361);
             var season2Episodes = show.Episodes.Where(ep => ep.SeasonNumber == 2).ToList();
             DisplayEpisodeTitles.Print(season2Episodes);
             Console.WriteLine("-----------");

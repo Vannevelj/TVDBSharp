@@ -26,7 +26,7 @@ namespace TVDBSharp.Models {
         /// </summary>
         /// <param name="showID">ID of the show to serialize into a <see cref="Show"/> object.</param>
         /// <returns>Returns the Show object.</returns>
-        public Show BuildShow(string showID) {
+        public Show BuildShow(int showID) {
             var builder = new ShowBuilder(_dataProvider.GetShow(showID));
             return builder.GetResult();
         }
@@ -48,7 +48,7 @@ namespace TVDBSharp.Models {
             var doc = _dataProvider.Search(query);
 
             foreach (var element in doc.Descendants("Series").Take(results)) {
-                var id = element.GetXmlData("seriesid");
+                var id = int.Parse(element.GetXmlData("seriesid"));
                 var response = _dataProvider.GetShow(id);
                 shows.Add(new ShowBuilder(response).GetResult());
             }

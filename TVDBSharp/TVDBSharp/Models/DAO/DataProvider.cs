@@ -8,7 +8,7 @@ namespace TVDBSharp.Models.DAO {
     public class DataProvider : IDataProvider {
         public string ApiKey { get; set; }
 
-        public XDocument GetShow(string showID) {
+        public XDocument GetShow(int showID) {
             using (var web = new WebClient()) {
                 var response = web.DownloadString(string.Format("http://thetvdb.com/api/{0}/series/{1}/all/", ApiKey, showID));
                 return XDocument.Parse(response);

@@ -23,7 +23,7 @@ namespace Tests {
             _data = data;
         }
 
-        public XDocument GetShow(string showID) {
+        public XDocument GetShow(int showID) {
             var showData = _data.GetShowData();
             var episodeData = _data.GetEpisodeData();
             var show = new Data { TestShow = new TestShow() };

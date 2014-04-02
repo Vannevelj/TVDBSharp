@@ -38,7 +38,9 @@ namespace Tests {
         public void GetShow() {
             // Pull XML tree trough the show builder
             var builder = new Builder(_dataProvider);
-            var result = builder.BuildShow(_data.GetShowData().Keys.FirstOrDefault(x => x.XmlValue == "id").XmlValue);
+
+            var showId = int.Parse(_data.GetShowData().Keys.First(x => x.XmlValue == "id").XmlValue);
+            var result = builder.BuildShow(showId);
 
             var showData = _data.GetShowData();
             var episodeData = _data.GetEpisodeData();

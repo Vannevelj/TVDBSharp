@@ -42,10 +42,16 @@ namespace TVDBSharp {
         /// </summary>
         /// <param name="showId">ID of the show.</param>
         /// <returns>Returns the corresponding show.</returns>
-        public Show GetShow(string showId) {
+        public Show GetShow(int showId) {
             return new Builder(_dataProvider).BuildShow(showId);
         }
 
+        /// <summary>
+        /// Get a specific episode based on its ID.
+        /// </summary>
+        /// <param name="episodeId">ID of the episode</param>
+        /// <param name="lang">ISO 639-1 language code for the episode</param>
+        /// <returns>The corresponding episode</returns>
         public Episode GetEpisode(int episodeId, string lang = "en")
         {
             return new Builder(_dataProvider).BuildEpisode(episodeId, lang);
