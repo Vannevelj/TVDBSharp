@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using TVDBSharp;
+using TVDBSharp.Models;
 
 namespace Examples {
     public class DisplayShowDetails {
@@ -9,7 +10,7 @@ namespace Examples {
         /// </summary>
         public DisplayShowDetails() {
             var apikey = ConfigurationManager.AppSettings["apikey"]; // Your own API key
-            var seriesid = "83882";
+            var seriesid = "76290";
 
             var tvdb = new TVDB(apikey);
             var result = tvdb.GetShow(seriesid);
@@ -35,17 +36,17 @@ namespace Examples {
             Console.WriteLine("{0}:\t{1}", "First aired", result.FirstAired);
 
             Console.Write("Actors:\t");
-            foreach (var element in result.Actors) {
+            foreach (var element in show.Actors) {
                 Console.Write("{0} | ", element);
             }
 
             Console.Write("Genres:\t");
-            foreach (var element in result.Genres) {
+            foreach (var element in show.Genres) {
                 Console.Write("{0} | ", element);
             }
 
             Console.Write("Episodes:");
-            foreach (var element in result.Episodes) {
+            foreach (var element in show.Episodes) {
                 Console.WriteLine(element.Title);
             }
 
