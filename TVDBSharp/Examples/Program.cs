@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Linq;
 using TVDBSharp;
+using TVDBSharp.Models.Enums;
 
 namespace Examples {
     internal class Program {
@@ -10,7 +11,7 @@ namespace Examples {
             // Your own API key
             var tvdb = new TVDB(ConfigurationManager.AppSettings["apikey"]);
 
-            // Retrieve and display Game of Thrones
+            /*// Retrieve and display Game of Thrones
             Console.WriteLine("Game of Thrones");
             var got = tvdb.GetShow(121361);
             DisplayShowDetails.Print(got);
@@ -33,7 +34,12 @@ namespace Examples {
             Console.WriteLine("Search for Battlestar Galactica on tvdb");
             var searchResults = tvdb.Search("Battlestar Galactica");
             DisplaySearchResult.Print(searchResults);
-            Console.WriteLine("-----------");
+            Console.WriteLine("-----------");*/
+
+            // Get updates of the last 24 hours
+            Console.WriteLine("Updates during the last 24 hours on thetvdb");
+            var updates = tvdb.GetUpdates(Interval.Day);
+            DisplayUpdates.Print(updates);
 
             Console.ReadKey();
         }

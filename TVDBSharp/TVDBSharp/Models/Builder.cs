@@ -37,6 +37,12 @@ namespace TVDBSharp.Models {
             return builder.GetResult();
         }
 
+        public Updates BuildUpdates(Interval interval)
+        {
+            var builder = new UpdatesBuilder(_dataProvider.GetUpdates(interval));
+            return builder.GetResult();
+        }
+
         /// <summary>
         /// Returns a list of <see cref="Show"/> objects that match the given query.
         /// </summary>
@@ -186,6 +192,54 @@ namespace TVDBSharp.Models {
                 }
 
                 return result;
+            }
+        }
+
+        public class UpdatesBuilder
+        {
+            private Updates _updates;
+
+            public UpdatesBuilder(XDocument doc)
+            {
+                if (doc.Root != null)
+                {
+                    _updates = new Updates()
+                    {
+                        UpdatedSeries = doc.Root.Elements("Series")
+                            .Select(elt => new UpdatedSerie()
+                            {
+                                Id = int.Parse(elt.Element("id").Value),
+                                Time = int.Parse(elt.Element("time").Value)
+                            })
+                            .ToList(),
+                        UpdatedEpisodes = doc.Root.Elements("Episode")
+                            .Select(elt => new UpdatedEpisode()
+                            {
+                                Id = int.Parse(elt.Element("id").Value),
+                                SerieId = int.Parse(elt.Element("Series").Value),
+                                Time = int.Parse(elt.Element("time").Value)
+                            })
+                            .ToList(),
+                        UpdatedBanners = doc.Root.Elements("Banner")
+                            .Select(elt => new UpdatedBanner()
+                            {
+                                SerieId = int.Parse(elt.Element("Series").Value),
+                                Format = elt.Element("format").Value,
+                                Language = elt.Elements("language").Select(n => n.Value).FirstOrDefault() ?? string.Empty,
+                                Path = elt.Element("path").Value,
+                                Type = elt.Element("type").Value,
+                                SeasonNum = elt.Elements("SeasonNum").Any()
+                                        ? int.Parse(elt.Element("SeasonNum").Value)
+                                        : (int?) null
+                            })
+                            .ToList()
+                    };
+                }
+            }
+
+            public Updates GetResult()
+            {
+                return _updates;
             }
         }
     }

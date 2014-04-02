@@ -48,6 +48,7 @@
     <Compile Include="DisplayEpisodeTitles.cs" />
     <Compile Include="DisplaySearchResult.cs" />
     <Compile Include="DisplayShowDetails.cs" />
+    <Compile Include="DisplayUpdates.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

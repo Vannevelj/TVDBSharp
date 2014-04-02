@@ -5,6 +5,7 @@ using System.Xml.Linq;
 using System.Xml.Serialization;
 using Tests.Models;
 using TVDBSharp.Models.DAO;
+using TVDBSharp.Models.Enums;
 
 namespace Tests {
     /// <summary>
@@ -60,6 +61,11 @@ namespace Tests {
         }
 
         public XDocument GetEpisode(int episodeId, string lang)
+        {
+            throw new NotImplementedException();
+        }
+
+        public XDocument GetUpdates(Interval interval)
         {
             throw new NotImplementedException();
         }

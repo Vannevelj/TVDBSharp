@@ -1,4 +1,5 @@
 ﻿using System.Xml.Linq;
+using TVDBSharp.Models.Enums;
 
 namespace TVDBSharp.Models.DAO {
     /// <summary>
@@ -24,6 +25,13 @@ namespace TVDBSharp.Models.DAO {
         /// <param name="lang">ISO 639-1 language code of the episode</param>
         /// <returns>XML tree of the episode object</returns>
         XDocument GetEpisode(int episodeId, string lang);
+
+        /// <summary>
+        /// Retrieves updates on tvdb (Shows, Episodes and Banners)
+        /// </summary>
+        /// <param name="interval">The interval for the updates</param>
+        /// <returns>XML tree of the Updates object</returns>
+        XDocument GetUpdates(Interval interval);
 
         /// <summary>
         /// Returns an XML tree representing a search query for the given parameter.

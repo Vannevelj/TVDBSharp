@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using TVDBSharp.Models;
 using TVDBSharp.Models.DAO;
+using TVDBSharp.Models.Enums;
 
 namespace TVDBSharp {
     /// <summary>
@@ -55,6 +56,11 @@ namespace TVDBSharp {
         public Episode GetEpisode(int episodeId, string lang = "en")
         {
             return new Builder(_dataProvider).BuildEpisode(episodeId, lang);
+        }
+
+        public Updates GetUpdates(Interval interval)
+        {
+            return new Builder(_dataProvider).BuiUpdates(interval);
         }
     }
 }
