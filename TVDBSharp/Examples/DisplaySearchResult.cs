@@ -12,7 +12,7 @@ namespace Examples {
         {
             foreach (var show in searchResults)
             {
-                Console.WriteLine("{0}:\t{1}", show.Name, show.ID);
+                Console.WriteLine("{0}:\t{1}", show.Name, show.Id);
             }
         }
     }

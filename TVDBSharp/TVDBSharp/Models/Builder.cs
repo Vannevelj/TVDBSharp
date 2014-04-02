@@ -67,8 +67,8 @@ namespace TVDBSharp.Models {
 
             public ShowBuilder(XDocument doc) {
                 _show = new Show();
-                _show.ID = doc.GetSeriesData("id");
-                _show.ImdbID = doc.GetSeriesData("IMDB_ID");
+                _show.Id = int.Parse(doc.GetSeriesData("id"));
+                _show.ImdbId = doc.GetSeriesData("IMDB_ID");
                 _show.Name = doc.GetSeriesData("SeriesName");
                 _show.Language = doc.GetSeriesData("Language");
                 _show.Network = doc.GetSeriesData("Network");

@@ -8,32 +8,26 @@ namespace Examples {
         /// <summary>
         /// This example demonstrates the retrieval and display of a show.
         /// </summary>
-        public DisplayShowDetails() {
-            var apikey = ConfigurationManager.AppSettings["apikey"]; // Your own API key
-            var seriesid = "76290";
-
-            var tvdb = new TVDB(apikey);
-            var result = tvdb.GetShow(seriesid);
-
-            Console.WriteLine("{0}:\t{1}", "IMDB ID", result.ImdbID);
-            Console.WriteLine("{0}:\t{1}", "ID", result.ID);
-            Console.WriteLine("{0}:\t{1}", "Language", result.Language);
-            Console.WriteLine("{0}:\t{1}", "Last update", result.LastUpdated);
-            Console.WriteLine("{0}:\t{1}", "Name", result.Name);
-            Console.WriteLine("{0}:\t{1}", "Network", result.Network);
-            Console.WriteLine("{0}:\t{1}", "Poster", result.Poster);
-            Console.WriteLine("{0}:\t{1}", "Rating", result.Rating);
-            Console.WriteLine("{0}:\t{1}", "# Votes", result.RatingCount);
-            Console.WriteLine("{0}:\t{1}", "Runtime", result.Runtime);
-            Console.WriteLine("{0}:\t{1}", "Status", result.Status);
-            Console.WriteLine("{0}:\t{1}", "Zap2it ID", result.Zap2ItID);
-            Console.WriteLine("{0}:\t{1}", "Airday", result.AirDay);
-            Console.WriteLine("{0}:\t{1}", "AirTime", result.AirTime);
-            Console.WriteLine("{0}:\t{1}", "Banner", result.Banner);
-            Console.WriteLine("{0}:\t{1}", "ContentRating", result.ContentRating);
-            Console.WriteLine("{0}:\t{1}", "Description", result.Description);
-            Console.WriteLine("{0}:\t{1}", "Fanart", result.Fanart);
-            Console.WriteLine("{0}:\t{1}", "First aired", result.FirstAired);
+        public static void Print(Show show) {
+            Console.WriteLine("{0}:\t{1}", "IMDB ID", show.ImdbID);
+            Console.WriteLine("{0}:\t{1}", "ID", show.ID);
+            Console.WriteLine("{0}:\t{1}", "Language", show.Language);
+            Console.WriteLine("{0}:\t{1}", "Last update", show.LastUpdated);
+            Console.WriteLine("{0}:\t{1}", "Name", show.Name);
+            Console.WriteLine("{0}:\t{1}", "Network", show.Network);
+            Console.WriteLine("{0}:\t{1}", "Poster", show.Poster);
+            Console.WriteLine("{0}:\t{1}", "Rating", show.Rating);
+            Console.WriteLine("{0}:\t{1}", "# Votes", show.RatingCount);
+            Console.WriteLine("{0}:\t{1}", "Runtime", show.Runtime);
+            Console.WriteLine("{0}:\t{1}", "Status", show.Status);
+            Console.WriteLine("{0}:\t{1}", "Zap2it ID", show.Zap2ItID);
+            Console.WriteLine("{0}:\t{1}", "Airday", show.AirDay);
+            Console.WriteLine("{0}:\t{1}", "AirTime", show.AirTime);
+            Console.WriteLine("{0}:\t{1}", "Banner", show.Banner);
+            Console.WriteLine("{0}:\t{1}", "ContentRating", show.ContentRating);
+            Console.WriteLine("{0}:\t{1}", "Description", show.Description);
+            Console.WriteLine("{0}:\t{1}", "Fanart", show.Fanart);
+            Console.WriteLine("{0}:\t{1}", "First aired", show.FirstAired);
 
             Console.Write("Actors:\t");
             foreach (var element in show.Actors) {
