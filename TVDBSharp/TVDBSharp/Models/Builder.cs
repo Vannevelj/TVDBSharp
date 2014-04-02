@@ -121,13 +121,10 @@ namespace TVDBSharp.Models {
             {
                 _episode = new Episode
                 {
-                    ID = episodeNode.GetXmlData("id"),
+                    Id = int.Parse(episodeNode.GetXmlData("id")),
                     Title = episodeNode.GetXmlData("EpisodeName"),
                     Description = episodeNode.GetXmlData("Overview"),
-                    EpisodeNumber =
-                        string.IsNullOrWhiteSpace(episodeNode.GetXmlData("EpisodeNumber"))
-                            ? (int?)null
-                            : Convert.ToInt32(episodeNode.GetXmlData("EpisodeNumber")),
+                    EpisodeNumber = int.Parse(episodeNode.GetXmlData("EpisodeNumber")),
                     Director = episodeNode.GetXmlData("Director"),
                     FileName = episodeNode.GetXmlData("filename"),
                     FirstAired =
@@ -135,7 +132,7 @@ namespace TVDBSharp.Models {
                             ? (DateTime?)null
                             : Utils.ParseDate(episodeNode.GetXmlData("FirstAired")),
                     GuestStars = new List<string>(episodeNode.GetXmlData("GuestStars").Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries)),
-                    ImdbID = episodeNode.GetXmlData("IMDB_ID"),
+                    ImdbId = episodeNode.GetXmlData("IMDB_ID"),
                     Language = episodeNode.GetXmlData("Language"),
                     LastUpdated =
                         string.IsNullOrWhiteSpace(episodeNode.GetXmlData("lastupdated"))
@@ -150,12 +147,9 @@ namespace TVDBSharp.Models {
                         string.IsNullOrWhiteSpace(episodeNode.GetXmlData("RatingCount"))
                             ? 0
                             : Convert.ToInt32(episodeNode.GetXmlData("RatingCount")),
-                    SeasonID = episodeNode.GetXmlData("seasonid"),
-                    SeasonNumber =
-                        string.IsNullOrWhiteSpace(episodeNode.GetXmlData("SeasonNumber"))
-                            ? (int?)null
-                            : Convert.ToInt32(episodeNode.GetXmlData("SeasonNumber")),
-                    SeriesID = episodeNode.GetXmlData("seriesid"),
+                    SeasonId = int.Parse(episodeNode.GetXmlData("seasonid")),
+                    SeasonNumber =int.Parse(episodeNode.GetXmlData("SeasonNumber")),
+                    SeriesId = int.Parse(episodeNode.GetXmlData("seriesid")),
                     ThumbHeight =
                         string.IsNullOrWhiteSpace(episodeNode.GetXmlData("thumb_height"))
                             ? (int?)null

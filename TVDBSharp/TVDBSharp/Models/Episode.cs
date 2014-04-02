@@ -9,7 +9,7 @@ namespace TVDBSharp.Models {
         /// <summary>
         /// Unique identifier for an episode.
         /// </summary>
-        public string ID { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Director of the episode.
@@ -24,12 +24,12 @@ namespace TVDBSharp.Models {
         /// <summary>
         /// This episode's number in the appropriate season.
         /// </summary>
-        public int? EpisodeNumber { get; set; }
+        public int EpisodeNumber { get; set; }
 
         /// <summary>
         /// This episode's season.
         /// </summary>
-        public int? SeasonNumber { get; set; }
+        public int SeasonNumber { get; set; }
 
         /// <summary>
         /// The date of the first time this episode has aired.
@@ -44,7 +44,7 @@ namespace TVDBSharp.Models {
         /// <summary>
         /// Unique identifier on IMDb.
         /// </summary>
-        public string ImdbID { get; set; }
+        public string ImdbId { get; set; }
 
         /// <summary>
         /// Main language spoken in the episode.
@@ -84,12 +84,12 @@ namespace TVDBSharp.Models {
         /// <summary>
         /// Unique identifier of the season.
         /// </summary>
-        public string SeasonID { get; set; }
+        public int SeasonId { get; set; }
 
         /// <summary>
         /// Unique identifier of the show.
         /// </summary>
-        public string SeriesID { get; set; }
+        public int SeriesId { get; set; }
 
         /// <summary>
         /// Height dimension of the thumbnail in pixels.

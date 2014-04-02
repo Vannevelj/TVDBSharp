@@ -12,8 +12,8 @@ namespace Examples {
         /// </summary>
         public static void Print(Episode episode){
             
-            Console.WriteLine("{0}:\t{1}", "IMDB ID", episode.ImdbID);
-            Console.WriteLine("{0}:\t{1}", "ID", episode.ID);
+            Console.WriteLine("{0}:\t{1}", "IMDB ID", episode.ImdbId);
+            Console.WriteLine("{0}:\t{1}", "ID", episode.Id);
             Console.WriteLine("{0}:\t{1}", "Language", episode.Language);
             Console.WriteLine("{0}:\t{1}", "Last update", episode.LastUpdated);
             Console.WriteLine("{0}:\t{1}", "Title", episode.Title);
@@ -24,8 +24,8 @@ namespace Examples {
             Console.WriteLine("{0}:\t{1}", "EpisodeNumber", episode.EpisodeNumber);
             Console.WriteLine("{0}:\t{1}", "SeasonNumber", episode.SeasonNumber);
             Console.WriteLine("{0}:\t{1}", "Filename", episode.FileName);
-            Console.WriteLine("{0}:\t{1}", "Series ID", episode.SeriesID);
-            Console.WriteLine("{0}:\t{1}", "Season ID", episode.SeasonID);
+            Console.WriteLine("{0}:\t{1}", "Series ID", episode.SeriesId);
+            Console.WriteLine("{0}:\t{1}", "Season ID", episode.SeasonId);
             Console.WriteLine("{0}:\t{1}", "Thumbnail Height", episode.ThumbHeight);
             Console.WriteLine("{0}:\t{1}", "Thumbnail Width", episode.ThumbHeight);
 
