@@ -34,6 +34,8 @@ namespace Examples {
             var searchResults = tvdb.Search("Battlestar Galactica");
             DisplaySearchResult.Print(searchResults);
             Console.WriteLine("-----------");
+
+            Console.ReadKey();
         }
     }
 }

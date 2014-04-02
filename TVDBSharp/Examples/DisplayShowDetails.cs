@@ -49,8 +49,6 @@ namespace Examples {
             foreach (var element in show.Episodes) {
                 Console.WriteLine(element.Title);
             }
-
-            Console.ReadKey();
         }
     }
 }

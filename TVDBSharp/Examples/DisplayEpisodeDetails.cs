@@ -38,8 +38,6 @@ namespace Examples {
             foreach (var element in episode.Writers) {
                 Console.Write(element);
             }
-
-            Console.ReadKey();
         }
     }
 }

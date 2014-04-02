@@ -14,7 +14,6 @@ namespace Examples {
             {
                 Console.WriteLine("{0}:\t{1}", show.Name, show.ID);
             }
-            Console.ReadKey();
         }
     }
 }
