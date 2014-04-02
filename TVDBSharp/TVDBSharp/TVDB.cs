@@ -60,7 +60,7 @@ namespace TVDBSharp {
 
         public Updates GetUpdates(Interval interval)
         {
-            return new Builder(_dataProvider).BuiUpdates(interval);
+            return new Builder(_dataProvider).BuildUpdates(interval);
         }
     }
 }
