@@ -225,7 +225,8 @@ namespace TVDBSharp.Models {
                                 Type = elt.Element("type").Value,
                                 SeasonNum = elt.Elements("SeasonNum").Any()
                                         ? int.Parse(elt.Element("SeasonNum").Value)
-                                        : (int?) null
+                                        : (int?) null,
+                                Time = int.Parse(elt.Element("time").Value)
                             })
                             .ToList()
                     };
