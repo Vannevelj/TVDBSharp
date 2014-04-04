@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Xml.Linq;
+using TVDBSharp.Models.Enums;
 
 namespace TVDBSharp.Models.DAO {
     /// <summary>
@@ -7,17 +8,37 @@ namespace TVDBSharp.Models.DAO {
     /// </summary>
     public class DataProvider : IDataProvider {
         public string ApiKey { get; set; }
+        private const string BaseUrl = "http://thetvdb.com";
 
-        public XDocument GetShow(string showID) {
+        public XDocument GetShow(int showID) {
             using (var web = new WebClient()) {
-                var response = web.DownloadString(string.Format("http://thetvdb.com/api/{0}/series/{1}/all/", ApiKey, showID));
+                var response = web.DownloadString(string.Format("{0}/api/{1}/series/{2}/all/", BaseUrl, ApiKey, showID));
+                return XDocument.Parse(response);
+            }
+        }
+
+        public XDocument GetEpisode(int episodeId, string lang)
+        {
+            using (var web = new WebClient())
+            {
+                var response = web.DownloadString(string.Format("{0}/api/{1}/episodes/{2}/{3}.xml", BaseUrl, ApiKey, episodeId, lang));
+                return XDocument.Parse(response);
+            }
+        }
+
+        public XDocument GetUpdates(Interval interval)
+        {
+            using (var web = new WebClient())
+            {
+                var response = web.DownloadString(string.Format("{0}/api/{1}/updates/updates_{2}.xml", 
+                    BaseUrl, ApiKey, IntervalHelpers.Print(interval)));
                 return XDocument.Parse(response);
             }
         }
 
         public XDocument Search(string query) {
             using (var web = new WebClient()) {
-                var response = web.DownloadString(string.Format("http://thetvdb.com/api/GetSeries.php?seriesname={0}", query));
+                var response = web.DownloadString(string.Format("{0}/api/GetSeries.php?seriesname={1}", BaseUrl, query));
                 return XDocument.Parse(response);
             }
         }

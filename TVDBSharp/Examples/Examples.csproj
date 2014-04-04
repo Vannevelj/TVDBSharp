@@ -5,6 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{4918B205-E641-444F-8B2C-3D80D918A806}</ProjectGuid>
+    <ProjectGuid>{4918B205-E641-444F-8B2C-3D80D918A806}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Examples</RootNamespace>
@@ -43,9 +44,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DisplayEpisodeDetails.cs" />
-    <Compile Include="DisplayEpisodeTitlesForSeason.cs" />
+    <Compile Include="DisplayEpisodeTitles.cs" />
     <Compile Include="DisplaySearchResult.cs" />
     <Compile Include="DisplayShowDetails.cs" />
+    <Compile Include="DisplayUpdates.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -54,6 +56,9 @@
       <Project>{0cc493d7-0a9f-4199-9615-0a977945d716}</Project>
       <Name>TVDBSharp</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

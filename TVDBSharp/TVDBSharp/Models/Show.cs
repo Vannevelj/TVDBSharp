@@ -10,12 +10,12 @@ namespace TVDBSharp.Models {
         /// <summary>
         /// Unique identifier used by IMDb.
         /// </summary>
-        public string ImdbID { get; set; }
+        public string ImdbId { get; set; }
 
         /// <summary>
         /// Unique identifier used by TVDB and TVDBSharp.
         /// </summary>
-        public string ID { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// List of all actors in the show.

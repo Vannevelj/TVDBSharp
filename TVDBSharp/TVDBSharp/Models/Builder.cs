@@ -26,8 +26,20 @@ namespace TVDBSharp.Models {
         /// </summary>
         /// <param name="showID">ID of the show to serialize into a <see cref="Show"/> object.</param>
         /// <returns>Returns the Show object.</returns>
-        public Show BuildShow(string showID) {
+        public Show BuildShow(int showID) {
             var builder = new ShowBuilder(_dataProvider.GetShow(showID));
+            return builder.GetResult();
+        }
+
+        public Episode BuildEpisode(int episodeId, string lang)
+        {
+            var builder = new EpisodeBuilder(_dataProvider.GetEpisode(episodeId, lang).Descendants("Episode").First());
+            return builder.GetResult();
+        }
+
+        public Updates BuildUpdates(Interval interval)
+        {
+            var builder = new UpdatesBuilder(_dataProvider.GetUpdates(interval));
             return builder.GetResult();
         }
 
@@ -42,7 +54,7 @@ namespace TVDBSharp.Models {
             var doc = _dataProvider.Search(query);
 
             foreach (var element in doc.Descendants("Series").Take(results)) {
-                var id = element.GetXmlData("seriesid");
+                var id = int.Parse(element.GetXmlData("seriesid"));
                 var response = _dataProvider.GetShow(id);
                 shows.Add(new ShowBuilder(response).GetResult());
             }
@@ -55,8 +67,8 @@ namespace TVDBSharp.Models {
 
             public ShowBuilder(XDocument doc) {
                 _show = new Show();
-                _show.ID = doc.GetSeriesData("id");
-                _show.ImdbID = doc.GetSeriesData("IMDB_ID");
+                _show.Id = int.Parse(doc.GetSeriesData("id"));
+                _show.ImdbId = doc.GetSeriesData("IMDB_ID");
                 _show.Name = doc.GetSeriesData("SeriesName");
                 _show.Language = doc.GetSeriesData("Language");
                 _show.Network = doc.GetSeriesData("Network");
@@ -93,7 +105,7 @@ namespace TVDBSharp.Models {
                 _show.ContentRating = Utils.GetContentRating(doc.GetSeriesData("ContentRating"));
                 _show.Genres = new List<string>(doc.GetSeriesData("Genre").Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries));
                 _show.Actors = new List<string>(doc.GetSeriesData("Actors").Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries));
-                _show.Episodes = new EpisodeBuilder(doc).BuildEpisodes();
+                _show.Episodes = new EpisodesBuilder(doc).BuildEpisodes();
             }
 
             public Show GetResult() {
@@ -101,69 +113,129 @@ namespace TVDBSharp.Models {
             }
         }
 
-        private class EpisodeBuilder {
+        public class EpisodeBuilder
+        {
+            private Episode _episode;
+
+            public EpisodeBuilder(XElement episodeNode)
+            {
+                _episode = new Episode
+                {
+                    Id = int.Parse(episodeNode.GetXmlData("id")),
+                    Title = episodeNode.GetXmlData("EpisodeName"),
+                    Description = episodeNode.GetXmlData("Overview"),
+                    EpisodeNumber = int.Parse(episodeNode.GetXmlData("EpisodeNumber")),
+                    Director = episodeNode.GetXmlData("Director"),
+                    FileName = episodeNode.GetXmlData("filename"),
+                    FirstAired =
+                        string.IsNullOrWhiteSpace(episodeNode.GetXmlData("FirstAired"))
+                            ? (DateTime?)null
+                            : Utils.ParseDate(episodeNode.GetXmlData("FirstAired")),
+                    GuestStars = new List<string>(episodeNode.GetXmlData("GuestStars").Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries)),
+                    ImdbId = episodeNode.GetXmlData("IMDB_ID"),
+                    Language = episodeNode.GetXmlData("Language"),
+                    LastUpdated =
+                        string.IsNullOrWhiteSpace(episodeNode.GetXmlData("lastupdated"))
+                            ? 0L
+                            : Convert.ToInt64(episodeNode.GetXmlData("lastupdated")),
+                    Rating =
+                        string.IsNullOrWhiteSpace(episodeNode.GetXmlData("Rating"))
+                            ? (double?)null
+                            : Convert.ToDouble(episodeNode.GetXmlData("Rating"),
+                                               System.Globalization.CultureInfo.InvariantCulture),
+                    RatingCount =
+                        string.IsNullOrWhiteSpace(episodeNode.GetXmlData("RatingCount"))
+                            ? 0
+                            : Convert.ToInt32(episodeNode.GetXmlData("RatingCount")),
+                    SeasonId = int.Parse(episodeNode.GetXmlData("seasonid")),
+                    SeasonNumber =int.Parse(episodeNode.GetXmlData("SeasonNumber")),
+                    SeriesId = int.Parse(episodeNode.GetXmlData("seriesid")),
+                    ThumbHeight =
+                        string.IsNullOrWhiteSpace(episodeNode.GetXmlData("thumb_height"))
+                            ? (int?)null
+                            : Convert.ToInt32(episodeNode.GetXmlData("thumb_height")),
+                    ThumbWidth =
+                        string.IsNullOrWhiteSpace(episodeNode.GetXmlData("thumb_width"))
+                            ? (int?)null
+                            : Convert.ToInt32(episodeNode.GetXmlData("thumb_width")),
+                    TmsExport = episodeNode.GetXmlData("tms_export"),
+                    Writers = new List<string>(episodeNode.GetXmlData("Writer").Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries))
+                };
+            }
+
+            public Episode GetResult()
+            {
+                return _episode;
+            }
+        }
+
+        private class EpisodesBuilder {
             private XDocument _doc;
 
-            public EpisodeBuilder(XDocument doc) {
+            public EpisodesBuilder(XDocument doc) {
                 _doc = doc;
             }
 
             public List<Episode> BuildEpisodes() {
                 var result = new List<Episode>();
 
-                foreach (var episode in _doc.Descendants("Episode")) {
-                    var ep = new Episode {
-                        ID = episode.GetXmlData("id"),
-                        Title = episode.GetXmlData("EpisodeName"),
-                        Description = episode.GetXmlData("Overview"),
-                        EpisodeNumber =
-                            string.IsNullOrWhiteSpace(episode.GetXmlData("EpisodeNumber"))
-                                ? (int?) null
-                                : Convert.ToInt32(episode.GetXmlData("EpisodeNumber")),
-                        Director = episode.GetXmlData("Director"),
-                        FileName = episode.GetXmlData("filename"),
-                        FirstAired =
-                            string.IsNullOrWhiteSpace(episode.GetXmlData("FirstAired"))
-                                ? (DateTime?) null
-                                : Utils.ParseDate(episode.GetXmlData("FirstAired")),
-                        GuestStars = new List<string>(episode.GetXmlData("GuestStars").Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries)),
-                        ImdbID = episode.GetXmlData("IMDB_ID"),
-                        Language = episode.GetXmlData("Language"),
-                        LastUpdated =
-                            string.IsNullOrWhiteSpace(episode.GetXmlData("lastupdated"))
-                                ? 0L
-                                : Convert.ToInt64(episode.GetXmlData("lastupdated")),
-                        Rating =
-                            string.IsNullOrWhiteSpace(episode.GetXmlData("Rating"))
-                                ? (double?) null
-                                : Convert.ToDouble(episode.GetXmlData("Rating"),
-                                                   System.Globalization.CultureInfo.InvariantCulture),
-                        RatingCount =
-                            string.IsNullOrWhiteSpace(episode.GetXmlData("RatingCount"))
-                                ? 0
-                                : Convert.ToInt32(episode.GetXmlData("RatingCount")),
-                        SeasonID = episode.GetXmlData("seasonid"),
-                        SeasonNumber =
-                            string.IsNullOrWhiteSpace(episode.GetXmlData("SeasonNumber"))
-                                ? (int?) null
-                                : Convert.ToInt32(episode.GetXmlData("SeasonNumber")),
-                        SeriesID = episode.GetXmlData("seriesid"),
-                        ThumbHeight =
-                            string.IsNullOrWhiteSpace(episode.GetXmlData("thumb_height"))
-                                ? (int?) null
-                                : Convert.ToInt32(episode.GetXmlData("thumb_height")),
-                        ThumbWidth =
-                            string.IsNullOrWhiteSpace(episode.GetXmlData("thumb_width"))
-                                ? (int?) null
-                                : Convert.ToInt32(episode.GetXmlData("thumb_width")),
-                        TmsExport = episode.GetXmlData("tms_export"),
-                        Writers = new List<string>(episode.GetXmlData("Writer").Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries))
-                    };
-
-                    result.Add(ep);
+                foreach (var episodeNode in _doc.Descendants("Episode"))
+                {
+                    var episode = new EpisodeBuilder(episodeNode).GetResult();
+                    result.Add(episode);
                 }
 
                 return result;
+            }
+        }
+
+        public class UpdatesBuilder
+        {
+            private Updates _updates;
+
+            public UpdatesBuilder(XDocument doc)
+            {
+                if (doc.Root != null)
+                {
+                    _updates = new Updates
+                    {
+                        Time = int.Parse(doc.Root.Attribute("time").Value),
+                        UpdatedSeries = doc.Root.Elements("Series")
+                            .Select(elt => new UpdatedSerie()
+                            {
+                                Id = int.Parse(elt.Element("id").Value),
+                                Time = int.Parse(elt.Element("time").Value)
+                            })
+                            .ToList(),
+                        UpdatedEpisodes = doc.Root.Elements("Episode")
+                            .Select(elt => new UpdatedEpisode()
+                            {
+                                Id = int.Parse(elt.Element("id").Value),
+                                SerieId = int.Parse(elt.Element("Series").Value),
+                                Time = int.Parse(elt.Element("time").Value)
+                            })
+                            .ToList(),
+                        UpdatedBanners = doc.Root.Elements("Banner")
+                            .Select(elt => new UpdatedBanner()
+                            {
+                                SerieId = int.Parse(elt.Element("Series").Value),
+                                Format = elt.Element("format").Value,
+                                Language = elt.Elements("language").Select(n => n.Value).FirstOrDefault() ?? string.Empty,
+                                Path = elt.Element("path").Value,
+                                Type = elt.Element("type").Value,
+                                SeasonNum = elt.Elements("SeasonNum").Any()
+                                        ? int.Parse(elt.Element("SeasonNum").Value)
+                                        : (int?) null,
+                                Time = int.Parse(elt.Element("time").Value)
+                            })
+                            .ToList()
+                    };
+                }
+            }
+
+            public Updates GetResult()
+            {
+                return _updates;
             }
         }
     }

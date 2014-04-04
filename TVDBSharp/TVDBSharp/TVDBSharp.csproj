@@ -5,6 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{0CC493D7-0A9F-4199-9615-0A977945D716}</ProjectGuid>
+    <ProjectGuid>{0CC493D7-0A9F-4199-9615-0A977945D716}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TVDBSharp</RootNamespace>
@@ -13,6 +14,7 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,12 +24,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -44,13 +50,18 @@
     <Compile Include="Models\DAO\IDataProvider.cs" />
     <Compile Include="Models\Enums\ContentRating.cs" />
     <Compile Include="Models\Enums\Frequency.cs" />
+    <Compile Include="Models\Enums\Interval.cs" />
     <Compile Include="Models\Enums\Status.cs" />
     <Compile Include="Models\Episode.cs" />
     <Compile Include="Models\Show.cs" />
+    <Compile Include="Models\Updates.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TVDB.cs" />
     <Compile Include="Utilities\Extensions.cs" />
     <Compile Include="Utilities\Utils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
