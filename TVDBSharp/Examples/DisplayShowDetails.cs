@@ -9,8 +9,8 @@ namespace Examples {
         /// This example demonstrates the retrieval and display of a show.
         /// </summary>
         public static void Print(Show show) {
-            Console.WriteLine("{0}:\t{1}", "IMDB ID", show.ImdbID);
-            Console.WriteLine("{0}:\t{1}", "ID", show.ID);
+            Console.WriteLine("{0}:\t{1}", "IMDB ID", show.ImdbId);
+            Console.WriteLine("{0}:\t{1}", "ID", show.Id);
             Console.WriteLine("{0}:\t{1}", "Language", show.Language);
             Console.WriteLine("{0}:\t{1}", "Last update", show.LastUpdated);
             Console.WriteLine("{0}:\t{1}", "Name", show.Name);

@@ -1,22 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TVDBSharp", "TVDBSharp\TVDBSharp.csproj", "{0CC493D7-0A9F-4199-9615-0A977945D716}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples", "Examples\Examples.csproj", "{4918B205-E641-444F-8B2C-3D80D918A806}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{F32B4596-46CB-4B07-B4B6-93B361C954A1}"
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TVDBSharp", "TVDBSharp\TVDBSharp.csproj", "{15C16B28-DB0B-4233-9C0B-9E955F7FA07C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples", "Examples\Examples.csproj", "{BBEA7075-7211-4510-9138-63BF314C881E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{5B85E883-AED0-42C5-BA21-3F76384AA7C9}"
-	ProjectSection(ProjectDependencies) = postProject
-		{15C16B28-DB0B-4233-9C0B-9E955F7FA07C} = {15C16B28-DB0B-4233-9C0B-9E955F7FA07C}
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,18 +27,6 @@ Global
 		{F32B4596-46CB-4B07-B4B6-93B361C954A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F32B4596-46CB-4B07-B4B6-93B361C954A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F32B4596-46CB-4B07-B4B6-93B361C954A1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{15C16B28-DB0B-4233-9C0B-9E955F7FA07C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{15C16B28-DB0B-4233-9C0B-9E955F7FA07C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{15C16B28-DB0B-4233-9C0B-9E955F7FA07C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{15C16B28-DB0B-4233-9C0B-9E955F7FA07C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BBEA7075-7211-4510-9138-63BF314C881E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BBEA7075-7211-4510-9138-63BF314C881E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BBEA7075-7211-4510-9138-63BF314C881E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BBEA7075-7211-4510-9138-63BF314C881E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5B85E883-AED0-42C5-BA21-3F76384AA7C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5B85E883-AED0-42C5-BA21-3F76384AA7C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5B85E883-AED0-42C5-BA21-3F76384AA7C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5B85E883-AED0-42C5-BA21-3F76384AA7C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
