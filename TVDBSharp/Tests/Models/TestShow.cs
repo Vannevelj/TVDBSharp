@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace Tests.Models {
+namespace Tests.Models
+{
     /// <summary>
-    /// Used to create an original XML representation of a show.
+    ///     Used to create an original XML representation of a show.
     /// </summary>
-    public class TestShow {
+    public class TestShow
+    {
 #pragma warning disable 1591 // Disables XML warnings
         public string id { get; set; }
         public string Actors { get; set; }
@@ -28,6 +30,7 @@ namespace Tests.Models {
         public string lastupdated { get; set; }
         public string poster { get; set; }
         public string zap2it_id { get; set; }
+
         [XmlElement("Episode")]
         public List<TestEpisode> Episodes { get; set; }
 #pragma warning restore 1591 // Enables XML warnings

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TVDBSharp.Models;
 
 namespace Examples
@@ -26,7 +22,8 @@ namespace Examples
             Console.WriteLine("{0} updated banners ----", updates.UpdatedBanners.Count);
             foreach (var banner in updates.UpdatedBanners)
             {
-                Console.WriteLine("{0} (serie #{1}) - {2}; {3}", banner.Path, banner.SerieId, banner.Format, banner.Timestamp);
+                Console.WriteLine("{0} (serie #{1}) - {2}; {3}", banner.Path, banner.SerieId, banner.Format,
+                    banner.Timestamp);
             }
         }
     }

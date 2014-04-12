@@ -2,16 +2,18 @@
 using System.Globalization;
 using TVDBSharp.Models.Enums;
 
-namespace TVDBSharp.Utilities {
+namespace TVDBSharp.Utilities
+{
     /// <summary>
-    /// Provides static utility methods.
+    ///     Provides static utility methods.
     /// </summary>
-    public static class Utils {
+    public static class Utils
+    {
         /// <summary>
-        /// Parses a string of format yyyy-MM-dd to a <see cref="DateTime"/> object.
+        ///     Parses a string of format yyyy-MM-dd to a <see cref="DateTime" /> object.
         /// </summary>
         /// <param name="value">String to be parsed.</param>
-        /// <returns>Returns a <see cref="DateTime"/> representation.</returns>
+        /// <returns>Returns a <see cref="DateTime" /> representation.</returns>
         public static DateTime ParseDate(string value)
         {
             DateTime date;
@@ -20,10 +22,10 @@ namespace TVDBSharp.Utilities {
         }
 
         /// <summary>
-        /// Parses a string of format hh:mm tt to a <see cref="TimeSpan"/> object.
+        ///     Parses a string of format hh:mm tt to a <see cref="TimeSpan" /> object.
         /// </summary>
         /// <param name="value">String to be parsed.</param>
-        /// <returns>Returns a <see cref="TimeSpan"/> representation.</returns>
+        /// <returns>Returns a <see cref="TimeSpan" /> representation.</returns>
         public static TimeSpan ParseTime(string value)
         {
             DateTime date;
@@ -36,13 +38,15 @@ namespace TVDBSharp.Utilities {
         }
 
         /// <summary>
-        /// Translates the incoming string to a <see cref="ContentRating"/> enum, if applicable.
+        ///     Translates the incoming string to a <see cref="ContentRating" /> enum, if applicable.
         /// </summary>
         /// <param name="rating">The rating in string format.</param>
-        /// <returns>Returns the appropriate <see cref="ContentRating"/> value.</returns>
+        /// <returns>Returns the appropriate <see cref="ContentRating" /> value.</returns>
         /// <exception cref="ArgumentException">Throws an exception if no conversion could be applied.</exception>
-        public static ContentRating GetContentRating(string rating) {
-            switch (rating) {
+        public static ContentRating GetContentRating(string rating)
+        {
+            switch (rating)
+            {
                 case "TV-14":
                     return ContentRating.TV14;
 

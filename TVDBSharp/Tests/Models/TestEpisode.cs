@@ -1,8 +1,10 @@
-﻿namespace Tests.Models {
+﻿namespace Tests.Models
+{
     /// <summary>
-    /// Used to create an original XML representation of an episode.
+    ///     Used to create an original XML representation of an episode.
     /// </summary>
-    public class TestEpisode {
+    public class TestEpisode
+    {
 #pragma warning disable 1591 // Disables XML warnings
         public string id { get; set; }
         public string Director { get; set; }

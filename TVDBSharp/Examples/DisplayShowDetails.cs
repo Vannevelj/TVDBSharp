@@ -1,14 +1,15 @@
 ﻿using System;
-using System.Configuration;
-using TVDBSharp;
 using TVDBSharp.Models;
 
-namespace Examples {
-    public class DisplayShowDetails {
+namespace Examples
+{
+    public class DisplayShowDetails
+    {
         /// <summary>
-        /// This example demonstrates the retrieval and display of a show.
+        ///     This example demonstrates the retrieval and display of a show.
         /// </summary>
-        public static void Print(Show show) {
+        public static void Print(Show show)
+        {
             Console.WriteLine("{0}:\t{1}", "IMDB ID", show.ImdbId);
             Console.WriteLine("{0}:\t{1}", "ID", show.Id);
             Console.WriteLine("{0}:\t{1}", "Language", show.Language);
@@ -30,17 +31,20 @@ namespace Examples {
             Console.WriteLine("{0}:\t{1}", "First aired", show.FirstAired);
 
             Console.Write("Actors:\t");
-            foreach (var element in show.Actors) {
+            foreach (var element in show.Actors)
+            {
                 Console.Write("{0} | ", element);
             }
 
             Console.Write("Genres:\t");
-            foreach (var element in show.Genres) {
+            foreach (var element in show.Genres)
+            {
                 Console.Write("{0} | ", element);
             }
 
             Console.Write("Episodes:");
-            foreach (var element in show.Episodes) {
+            foreach (var element in show.Episodes)
+            {
                 Console.WriteLine(element.Title);
             }
         }
