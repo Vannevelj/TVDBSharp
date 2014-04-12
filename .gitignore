@@ -1,5 +1,5 @@
 # App.Config with API key
-/TVDBSharp/App.config
+TVDBSharp/Examples/App.config
 
 # Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
 [Bb]in/
