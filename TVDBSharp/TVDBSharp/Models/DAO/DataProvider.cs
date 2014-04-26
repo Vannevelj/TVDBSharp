@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.IO;
+using System.Net;
 using System.Xml.Linq;
 using TVDBSharp.Models.Enums;
 
@@ -16,8 +17,9 @@ namespace TVDBSharp.Models.DAO
         {
             using (var web = new WebClient())
             {
-                var response = web.DownloadString(string.Format("{0}/api/{1}/series/{2}/all/", BaseUrl, ApiKey, showID));
-                return XDocument.Parse(response);
+                var response = web.DownloadData(string.Format("{0}/api/{1}/series/{2}/all/", BaseUrl, ApiKey, showID));
+                using (var memoryStream = new MemoryStream(response))
+                    return XDocument.Load(memoryStream);
             }
         }
 
