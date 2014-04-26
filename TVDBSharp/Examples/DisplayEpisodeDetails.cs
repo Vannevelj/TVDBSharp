@@ -21,7 +21,7 @@ namespace Examples
             Console.WriteLine("{0}:\t{1}", "Director", episode.Director);
             Console.WriteLine("{0}:\t{1}", "EpisodeNumber", episode.EpisodeNumber);
             Console.WriteLine("{0}:\t{1}", "SeasonNumber", episode.SeasonNumber);
-            Console.WriteLine("{0}:\t{1}", "Filename", episode.FileName);
+            Console.WriteLine("{0}:\t{1}", "Filename", episode.EpisodeImage);
             Console.WriteLine("{0}:\t{1}", "Series ID", episode.SeriesId);
             Console.WriteLine("{0}:\t{1}", "Season ID", episode.SeasonId);
             Console.WriteLine("{0}:\t{1}", "Thumbnail Height", episode.ThumbHeight);
