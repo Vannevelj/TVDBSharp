@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.IO;
+using System.Net;
 using System.Xml.Linq;
 using TVDBSharp.Models.Enums;
 
@@ -14,41 +15,29 @@ namespace TVDBSharp.Models.DAO
 
         public XDocument GetShow(int showID)
         {
-            using (var web = new WebClient())
-            {
-                var response = web.DownloadString(string.Format("{0}/api/{1}/series/{2}/all/", BaseUrl, ApiKey, showID));
-                return XDocument.Parse(response);
-            }
+            return GetXDocumentFromUrl(string.Format("{0}/api/{1}/series/{2}/all/", BaseUrl, ApiKey, showID));
         }
 
         public XDocument GetEpisode(int episodeId, string lang)
         {
-            using (var web = new WebClient())
-            {
-                var response =
-                    web.DownloadString(string.Format("{0}/api/{1}/episodes/{2}/{3}.xml", BaseUrl, ApiKey, episodeId,
-                        lang));
-                return XDocument.Parse(response);
-            }
+            return GetXDocumentFromUrl(string.Format("{0}/api/{1}/episodes/{2}/{3}.xml", BaseUrl, ApiKey, episodeId, lang));
         }
 
         public XDocument GetUpdates(Interval interval)
         {
-            using (var web = new WebClient())
-            {
-                var response = web.DownloadString(string.Format("{0}/api/{1}/updates/updates_{2}.xml",
-                    BaseUrl, ApiKey, IntervalHelpers.Print(interval)));
-                return XDocument.Parse(response);
-            }
+            return GetXDocumentFromUrl(string.Format("{0}/api/{1}/updates/updates_{2}.xml", BaseUrl, ApiKey, IntervalHelpers.Print(interval)));
         }
 
         public XDocument Search(string query)
         {
+            return GetXDocumentFromUrl(string.Format("{0}/api/GetSeries.php?seriesname={1}", BaseUrl, query));
+        }
+
+        private static XDocument GetXDocumentFromUrl(string url)
+        {
             using (var web = new WebClient())
-            {
-                var response = web.DownloadString(string.Format("{0}/api/GetSeries.php?seriesname={1}", BaseUrl, query));
-                return XDocument.Parse(response);
-            }
+                using (var memoryStream = new MemoryStream(web.DownloadData(url)))
+                    return XDocument.Load(memoryStream);
         }
     }
 }
