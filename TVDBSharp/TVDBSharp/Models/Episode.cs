@@ -76,7 +76,7 @@ namespace TVDBSharp.Models
         /// <summary>
         ///     Let me know if you find out what this is.
         /// </summary>
-        public string FileName { get; set; }
+        public Uri EpisodeImage { get; set; }
 
         /// <summary>
         ///     Timestamp of the last update to this episode.

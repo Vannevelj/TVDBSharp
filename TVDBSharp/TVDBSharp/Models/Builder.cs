@@ -13,6 +13,7 @@ namespace TVDBSharp.Models
     /// </summary>
     public class Builder
     {
+        private const string UriPrefix = "http://thetvdb.com/banners/";
         private readonly IDataProvider _dataProvider;
 
         /// <summary>
@@ -68,6 +69,11 @@ namespace TVDBSharp.Models
             return shows;
         }
 
+        private static Uri GetBannerUri(string uriSuffix)
+        {
+            return new Uri(UriPrefix + uriSuffix, UriKind.Absolute);
+        }
+
         private class ShowBuilder
         {
             private readonly Show _show;
@@ -91,12 +97,12 @@ namespace TVDBSharp.Models
                 _show.Runtime = string.IsNullOrWhiteSpace(doc.GetSeriesData("Runtime"))
                     ? (int?) null
                     : Convert.ToInt32(doc.GetSeriesData("Runtime"));
-                _show.Banner = doc.GetSeriesData("banner");
-                _show.Fanart = doc.GetSeriesData("fanart");
+                _show.Banner = GetBannerUri(doc.GetSeriesData("banner"));
+                _show.Fanart = GetBannerUri(doc.GetSeriesData("fanart"));
                 _show.LastUpdated = string.IsNullOrWhiteSpace(doc.GetSeriesData("lastupdated"))
                     ? (long?) null
                     : Convert.ToInt64(doc.GetSeriesData("lastupdated"));
-                _show.Poster = doc.GetSeriesData("poster");
+                _show.Poster = GetBannerUri(doc.GetSeriesData("poster"));
                 _show.Zap2ItID = doc.GetSeriesData("zap2it_id");
                 _show.FirstAired = string.IsNullOrWhiteSpace(doc.GetSeriesData("FirstAired"))
                     ? (DateTime?) null
@@ -139,7 +145,7 @@ namespace TVDBSharp.Models
                     Description = episodeNode.GetXmlData("Overview"),
                     EpisodeNumber = int.Parse(episodeNode.GetXmlData("EpisodeNumber")),
                     Director = episodeNode.GetXmlData("Director"),
-                    FileName = episodeNode.GetXmlData("filename"),
+                    EpisodeImage = GetBannerUri(episodeNode.GetXmlData("filename")),
                     FirstAired =
                         string.IsNullOrWhiteSpace(episodeNode.GetXmlData("FirstAired"))
                             ? (DateTime?) null

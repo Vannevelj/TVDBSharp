@@ -92,12 +92,12 @@ namespace TVDBSharp.Models
         /// <summary>
         ///     Link to the banner image.
         /// </summary>
-        public string Banner { get; set; }
+        public Uri Banner { get; set; }
 
         /// <summary>
         ///     Link to a fanart image.
         /// </summary>
-        public string Fanart { get; set; }
+        public Uri Fanart { get; set; }
 
         /// <summary>
         ///     Timestamp of the latest update.
@@ -107,7 +107,7 @@ namespace TVDBSharp.Models
         /// <summary>
         ///     Let me know if you find out what this is.
         /// </summary>
-        public string Poster { get; set; }
+        public Uri Poster { get; set; }
 
         /// <summary>
         ///     No clue
