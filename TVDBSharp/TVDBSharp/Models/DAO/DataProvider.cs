@@ -30,7 +30,7 @@ namespace TVDBSharp.Models.DAO
 
         public XDocument Search(string query)
         {
-            return GetXDocumentFromUrl(string.Format("{0}/api/GetSeries.php?seriesname={1}", BaseUrl, query));
+            return GetXDocumentFromUrl(string.Format("{0}/api/GetSeries.php?seriesname={1}&language=all", BaseUrl, query));
         }
 
         private static XDocument GetXDocumentFromUrl(string url)
