@@ -107,5 +107,10 @@ namespace TVDBSharp.Models
         ///     Let me know if you find out what this is.
         /// </summary>
         public string TmsExport { get; set; }
+        
+        /// <summary>
+        /// Absolute episode number
+        /// </summary>
+        public string AbsoluteNumber { get; set; }
     }
 }
