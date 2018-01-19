@@ -182,7 +182,8 @@ namespace TVDBSharp.Models
                     TmsExport = episodeNode.GetXmlData("tms_export"),
                     Writers =
                         new List<string>(episodeNode.GetXmlData("Writer")
-                            .Split(new[] {'|'}, StringSplitOptions.RemoveEmptyEntries))
+                            .Split(new[] {'|'}, StringSplitOptions.RemoveEmptyEntries)),
+                    AbsoluteNumber = int.Parse(episodeNode.GetXmlData("absolute_number")),
                 };
             }
 
