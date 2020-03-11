@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tests.Models;
@@ -40,11 +42,11 @@ namespace Tests
         {
             // Pull XML tree trough the show builder
             var builder = new Builder(_dataProvider);
-
-            var showId = int.Parse(_data.GetShowData().Keys.First(x => x.XmlValue == "id").XmlValue);
-            var result = builder.BuildShow(showId);
-
             var showData = _data.GetShowData();
+
+            var showId = int.Parse(showData.First(x => x.Key.XmlValue == "id").Value.ObjValue);
+            var result = builder.BuildShow(showId);
+            
             var episodeData = _data.GetEpisodeData();
 
             // Assert equality between value conversions for show data
