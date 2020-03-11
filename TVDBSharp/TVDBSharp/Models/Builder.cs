@@ -68,10 +68,10 @@ namespace TVDBSharp.Models
                 _episode = new Episode
                 {
                     Id = int.Parse(episodeNode.GetXmlData("id")),
-                    Title = episodeNode.GetXmlData("EpisodeName"),
-                    Description = episodeNode.GetXmlData("Overview"),
-                    EpisodeNumber = int.Parse(episodeNode.GetXmlData("EpisodeNumber")),
-                    Director = episodeNode.GetXmlData("Director"),
+                    EpisodeName = episodeNode.GetXmlData("EpisodeName"),
+                    Overview = episodeNode.GetXmlData("Overview"),
+                    AiredEpisodeNumber = int.Parse(episodeNode.GetXmlData("EpisodeNumber")),
+                    Directors = episodeNode.GetXmlData("Director"),
                     //EpisodeImage = GetBannerUri(episodeNode.GetXmlData("filename")),
                     //FirstAired =
                     //    string.IsNullOrWhiteSpace(episodeNode.GetXmlData("FirstAired"))
@@ -81,22 +81,21 @@ namespace TVDBSharp.Models
                         new List<string>(episodeNode.GetXmlData("GuestStars")
                             .Split(new[] {'|'}, StringSplitOptions.RemoveEmptyEntries)),
                     ImdbId = episodeNode.GetXmlData("IMDB_ID"),
-                    Language = episodeNode.GetXmlData("Language"),
                     LastUpdated =
                         string.IsNullOrWhiteSpace(episodeNode.GetXmlData("lastupdated"))
                             ? 0L
                             : Convert.ToInt64(episodeNode.GetXmlData("lastupdated")),
-                    Rating =
+                    SiteRating =
                         string.IsNullOrWhiteSpace(episodeNode.GetXmlData("Rating"))
                             ? (double?) null
                             : Convert.ToDouble(episodeNode.GetXmlData("Rating"),
                                 System.Globalization.CultureInfo.InvariantCulture),
-                    RatingCount =
+                    SiteRatingCount =
                         string.IsNullOrWhiteSpace(episodeNode.GetXmlData("RatingCount"))
                             ? 0
                             : Convert.ToInt32(episodeNode.GetXmlData("RatingCount")),
-                    SeasonId = int.Parse(episodeNode.GetXmlData("seasonid")),
-                    SeasonNumber = int.Parse(episodeNode.GetXmlData("SeasonNumber")),
+                    AiredSeasonId = int.Parse(episodeNode.GetXmlData("seasonid")),
+                    AiredSeason = int.Parse(episodeNode.GetXmlData("SeasonNumber")),
                     SeriesId = int.Parse(episodeNode.GetXmlData("seriesid")),
                     ThumbHeight =
                         string.IsNullOrWhiteSpace(episodeNode.GetXmlData("thumb_height"))
@@ -106,7 +105,6 @@ namespace TVDBSharp.Models
                         string.IsNullOrWhiteSpace(episodeNode.GetXmlData("thumb_width"))
                             ? (int?) null
                             : Convert.ToInt32(episodeNode.GetXmlData("thumb_width")),
-                    TmsExport = episodeNode.GetXmlData("tms_export"),
                     Writers =
                         new List<string>(episodeNode.GetXmlData("Writer")
                             .Split(new[] {'|'}, StringSplitOptions.RemoveEmptyEntries))

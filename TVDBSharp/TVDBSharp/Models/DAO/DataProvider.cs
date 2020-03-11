@@ -44,6 +44,11 @@ namespace TVDBSharp.Models.DAO
             return GetResponse<Show>($"{BaseUrl}/series/{showID}");
         }
 
+        public List<Episode> GetEpisodes(int showId)
+        {
+            return GetResponse<List<Episode>>($"{BaseUrl}/series/{showId}/episodes");
+        }
+
         public Episode GetEpisode(int episodeId, string lang)
         {
             return GetResponse<Episode>($"{BaseUrl}/api/{""}/episodes/{episodeId}/{lang}.xml");
@@ -64,7 +69,7 @@ namespace TVDBSharp.Models.DAO
             using (var web = new WebClient())
             {
                 web.Headers.Add(HttpRequestHeader.Authorization, $"Bearer {AuthToken}");
-                web.Headers.Add(HttpRequestHeader.Accept, "application/vnd.thetvdb.v1");
+                web.Headers.Add(HttpRequestHeader.Accept, "application/vnd.thetvdb.v3");
 
                 var bytes = web.DownloadData(url);
                 var json = Encoding.UTF8.GetString(bytes);

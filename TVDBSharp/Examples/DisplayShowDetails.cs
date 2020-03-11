@@ -35,12 +35,6 @@ namespace Examples
             {
                 Console.Write("{0} | ", element);
             }
-
-            Console.Write("Episodes:");
-            foreach (var element in show.Episodes)
-            {
-                Console.WriteLine(element.Title);
-            }
         }
     }
 }

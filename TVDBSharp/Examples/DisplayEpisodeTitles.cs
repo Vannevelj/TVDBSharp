@@ -13,7 +13,7 @@ namespace Examples
         {
             foreach (var episode in episodes)
             {
-                Console.WriteLine(episode.Title);
+                Console.WriteLine(episode.EpisodeName);
             }
         }
     }

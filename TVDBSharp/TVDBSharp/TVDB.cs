@@ -43,6 +43,16 @@ namespace TVDBSharp
         }
 
         /// <summary>
+        /// Get all episodes for a given show
+        /// </summary>
+        /// <param name="showId">ID of the show.</param>
+        /// <returns>A list of episodes</returns>
+        public List<Episode> GetEpisodes(int showId)
+        {
+            return _dataProvider.GetEpisodes(showId);
+        }
+
+        /// <summary>
         ///     Get a specific episode based on its ID.
         /// </summary>
         /// <param name="episodeId">ID of the episode</param>

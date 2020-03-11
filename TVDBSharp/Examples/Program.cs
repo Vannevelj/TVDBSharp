@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using TVDBSharp;
 using TVDBSharp.Models.Enums;
@@ -14,7 +15,7 @@ namespace Examples
             var tvdb = new TVDB(ConfigurationManager.AppSettings["apikey"]);
 
             // Retrieve and display Game of Thrones
-            //GetSpecificShow(tvdb);
+            GetSpecificShow(tvdb);
 
             // Retrieve and display Game of Thrones s04e01
             //GetSpecificEpisode(tvdb);
@@ -26,7 +27,7 @@ namespace Examples
             //SearchShow(tvdb);
 
             // Get updates of the last 24 hours
-            GetUpdates(tvdb);
+            //GetUpdates(tvdb);
 
             Console.ReadKey();
         }
@@ -36,6 +37,10 @@ namespace Examples
             Console.WriteLine("Game of Thrones");
             var got = tvdb.GetShow(121361);
             DisplayShowDetails.Print(got);
+
+            var eps = tvdb.GetEpisodes(121361);
+            DisplayEpisodeDetails.Print(eps.First());
+
             Console.WriteLine("-----------");
         }
 
@@ -50,8 +55,8 @@ namespace Examples
         private static void GetEpisodeTitlesForSeason(TVDB tvdb)
         {
             Console.WriteLine("Episodes of Game of Thrones season 2");
-            var show = tvdb.GetShow(121361);
-            var season2Episodes = show.Episodes.Where(ep => ep.SeasonNumber == 2).ToList();
+            var episodes = tvdb.GetEpisodes(121361);
+            var season2Episodes = episodes.Where(ep => ep.AiredSeason == 2).ToList();
             DisplayEpisodeTitles.Print(season2Episodes);
             Console.WriteLine("-----------");
         }

@@ -12,18 +12,17 @@ namespace Examples
         {
             Console.WriteLine("{0}:\t{1}", "IMDB ID", episode.ImdbId);
             Console.WriteLine("{0}:\t{1}", "ID", episode.Id);
-            Console.WriteLine("{0}:\t{1}", "Language", episode.Language);
             Console.WriteLine("{0}:\t{1}", "Last update", episode.LastUpdated);
-            Console.WriteLine("{0}:\t{1}", "Title", episode.Title);
-            Console.WriteLine("{0}:\t{1}", "Rating", episode.Rating);
-            Console.WriteLine("{0}:\t{1}", "# Votes", episode.RatingCount);
-            Console.WriteLine("{0}:\t{1}", "Description", episode.Description);
-            Console.WriteLine("{0}:\t{1}", "Director", episode.Director);
-            Console.WriteLine("{0}:\t{1}", "EpisodeNumber", episode.EpisodeNumber);
-            Console.WriteLine("{0}:\t{1}", "SeasonNumber", episode.SeasonNumber);
+            Console.WriteLine("{0}:\t{1}", "Title", episode.EpisodeName);
+            Console.WriteLine("{0}:\t{1}", "Rating", episode.SiteRating);
+            Console.WriteLine("{0}:\t{1}", "# Votes", episode.SiteRatingCount);
+            Console.WriteLine("{0}:\t{1}", "Description", episode.Overview);
+            Console.WriteLine("{0}:\t{1}", "Director", episode.Directors);
+            Console.WriteLine("{0}:\t{1}", "EpisodeNumber", episode.AiredEpisodeNumber);
+            Console.WriteLine("{0}:\t{1}", "SeasonNumber", episode.AiredSeason);
             Console.WriteLine("{0}:\t{1}", "Filename", episode.EpisodeImage);
             Console.WriteLine("{0}:\t{1}", "Series ID", episode.SeriesId);
-            Console.WriteLine("{0}:\t{1}", "Season ID", episode.SeasonId);
+            Console.WriteLine("{0}:\t{1}", "Season ID", episode.AiredSeasonId);
             Console.WriteLine("{0}:\t{1}", "Thumbnail Height", episode.ThumbHeight);
             Console.WriteLine("{0}:\t{1}", "Thumbnail Width", episode.ThumbHeight);
 

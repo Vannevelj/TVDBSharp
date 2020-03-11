@@ -115,10 +115,5 @@ namespace TVDBSharp.Models
         ///     No clue
         /// </summary>
         public string Zap2ItID { get; set; }
-
-        /// <summary>
-        ///     A list of all episodes associated with this show.
-        /// </summary>
-        public List<Episode> Episodes { get; set; }
     }
 }

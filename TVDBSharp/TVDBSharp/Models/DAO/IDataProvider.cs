@@ -11,9 +11,11 @@ namespace TVDBSharp.Models.DAO
         /// <summary>
         ///     Retrieves the show with the given id and returns the corresponding XML tree.
         /// </summary>
-        /// <param name="showID">ID of the show you wish to lookup.</param>
+        /// <param name="showId">ID of the show you wish to lookup.</param>
         /// <returns>Returns an XML tree of the show object.</returns>
-        Show GetShow(int showID);
+        Show GetShow(int showId);
+
+        List<Episode> GetEpisodes(int showId);
 
         /// <summary>
         ///     Retrieves the episode with the given id and returns the corresponding XML tree.

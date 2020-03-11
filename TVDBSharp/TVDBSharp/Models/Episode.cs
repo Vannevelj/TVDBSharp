@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using TVDBSharp.Models.Deserialization;
 
 namespace TVDBSharp.Models
 {
@@ -14,24 +16,29 @@ namespace TVDBSharp.Models
         public int Id { get; set; }
 
         /// <summary>
-        ///     Director of the episode.
+        ///     Directors for the episode.
         /// </summary>
-        public string Director { get; set; }
+        public List<string> Directors { get; set; }
+
+        /// <summary>
+        ///     Writers for the episode.
+        /// </summary>
+        public List<string> Writers { get; set; }
 
         /// <summary>
         ///     This episode's title.
         /// </summary>
-        public string Title { get; set; }
+        public string EpisodeName { get; set; }
 
         /// <summary>
         ///     This episode's number in the appropriate season.
         /// </summary>
-        public int EpisodeNumber { get; set; }
+        public int AiredEpisodeNumber { get; set; }
 
         /// <summary>
         ///     This episode's season.
         /// </summary>
-        public int SeasonNumber { get; set; }
+        public int AiredSeason { get; set; }
 
         /// <summary>
         ///     The date of the first time this episode has aired.
@@ -49,33 +56,30 @@ namespace TVDBSharp.Models
         public string ImdbId { get; set; }
 
         /// <summary>
-        ///     Main language spoken in the episode.
-        /// </summary>
-        public string Language { get; set; }
-
-        /// <summary>
         ///     A short description of the episode.
         /// </summary>
-        public string Description { get; set; }
+        public string Overview { get; set; }
 
         /// <summary>
         ///     Average rating as shown on IMDb.
         /// </summary>
-        public double? Rating { get; set; }
+        public double? SiteRating { get; set; }
 
         /// <summary>
         ///     Amount of votes cast.
         /// </summary>
-        public int RatingCount { get; set; }
+        public int SiteRatingCount { get; set; }
 
         /// <summary>
         ///     Writers(s) of the episode.
         /// </summary>
-        public List<String> Writers { get; set; }
+        public List<string> Writers { get; set; }
 
         /// <summary>
         ///     Let me know if you find out what this is.
         /// </summary>
+        [JsonProperty("filename")]
+        [JsonConverter(typeof(BannerConverter))]
         public Uri EpisodeImage { get; set; }
 
         /// <summary>
@@ -86,7 +90,7 @@ namespace TVDBSharp.Models
         /// <summary>
         ///     Unique identifier of the season.
         /// </summary>
-        public int SeasonId { get; set; }
+        public int AiredSeasonId { get; set; }
 
         /// <summary>
         ///     Unique identifier of the show.
@@ -102,10 +106,5 @@ namespace TVDBSharp.Models
         ///     Width dimension of the thumbnail in pixels;
         /// </summary>
         public int? ThumbWidth { get; set; }
-
-        /// <summary>
-        ///     Let me know if you find out what this is.
-        /// </summary>
-        public string TmsExport { get; set; }
     }
 }
