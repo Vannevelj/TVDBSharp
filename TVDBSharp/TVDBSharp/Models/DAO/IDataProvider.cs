@@ -9,11 +9,6 @@ namespace TVDBSharp.Models.DAO
     public interface IDataProvider
     {
         /// <summary>
-        ///     The API key provided by TVDB.
-        /// </summary>
-        string ApiKey { get; set; }
-
-        /// <summary>
         ///     Retrieves the show with the given id and returns the corresponding XML tree.
         /// </summary>
         /// <param name="showID">ID of the show you wish to lookup.</param>

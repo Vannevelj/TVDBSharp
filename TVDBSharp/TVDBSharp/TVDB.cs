@@ -13,23 +13,12 @@ namespace TVDBSharp
         private readonly IDataProvider _dataProvider;
 
         /// <summary>
-        ///     Creates a new instance with the provided API key and dataProvider.
-        /// </summary>
-        /// <param name="apiKey">The API key provided by TVDB.</param>
-        /// <param name="dataProvider">Specify your own <see cref="IDataProvider" /> instance.</param>
-        public TVDB(string apiKey, IDataProvider dataProvider)
-        {
-            _dataProvider = dataProvider;
-            _dataProvider.ApiKey = apiKey;
-        }
-
-        /// <summary>
         ///     Creates a new instance with the provided API key and standard <see cref="IDataProvider" />.
         /// </summary>
         /// <param name="apiKey">The API key provided by TVDB.</param>
         public TVDB(string apiKey)
         {
-            _dataProvider = new DataProvider {ApiKey = apiKey};
+            _dataProvider = new DataProvider(apiKey);
         }
 
         /// <summary>

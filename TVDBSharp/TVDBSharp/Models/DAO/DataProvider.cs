@@ -1,5 +1,10 @@
-﻿using System.IO;
+﻿using Newtonsoft.Json;
+using System;
+using System.IO;
 using System.Net;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 using TVDBSharp.Models.Enums;
 
@@ -10,34 +15,65 @@ namespace TVDBSharp.Models.DAO
     /// </summary>
     public class DataProvider : IDataProvider
     {
-        public string ApiKey { get; set; }
-        private const string BaseUrl = "http://thetvdb.com";
+        private string AuthToken { get; }
+        private const string BaseUrl = "https://api.thetvdb.com";
+
+        public DataProvider(string apiKey)
+        {
+            AuthToken = GetJwtToken(apiKey).GetAwaiter().GetResult();
+        }
+
+        private async Task<string> GetJwtToken(string apiKey)
+        {
+            using (var client = new HttpClient()) 
+            {
+                var response = await client.PostAsync($"{BaseUrl}/login", new StringContent($"{{ \"apikey\": \"{apiKey}\" }}", Encoding.UTF8, "application/json"));
+                response.EnsureSuccessStatusCode();
+
+                var content = await response.Content.ReadAsStringAsync();
+                dynamic item = JsonConvert.DeserializeObject<object>(content);
+                var token = item["token"];
+                return token;
+            }
+
+            throw new InvalidOperationException("Unable to retrieve the authentication token");
+        }
 
         public XDocument GetShow(int showID)
         {
-            return GetXDocumentFromUrl(string.Format("{0}/api/{1}/series/{2}/all/", BaseUrl, ApiKey, showID));
+            return GetXDocumentFromUrl($"{BaseUrl}/series/{showID}");
         }
 
         public XDocument GetEpisode(int episodeId, string lang)
         {
-            return GetXDocumentFromUrl(string.Format("{0}/api/{1}/episodes/{2}/{3}.xml", BaseUrl, ApiKey, episodeId, lang));
+            return GetXDocumentFromUrl($"{BaseUrl}/api/{""}/episodes/{episodeId}/{lang}.xml");
         }
 
         public XDocument GetUpdates(Interval interval)
         {
-            return GetXDocumentFromUrl(string.Format("{0}/api/{1}/updates/updates_{2}.xml", BaseUrl, ApiKey, IntervalHelpers.Print(interval)));
+            return GetXDocumentFromUrl($"{BaseUrl}/api/{""}/updates/updates_{IntervalHelpers.Print(interval)}.xml");
         }
 
         public XDocument Search(string query)
         {
-            return GetXDocumentFromUrl(string.Format("{0}/api/GetSeries.php?seriesname={1}&language=all", BaseUrl, query));
+            return GetXDocumentFromUrl($"{BaseUrl}/api/GetSeries.php?seriesname={query}&language=all");
         }
 
-        private static XDocument GetXDocumentFromUrl(string url)
+        private XDocument GetXDocumentFromUrl(string url)
         {
             using (var web = new WebClient())
-                using (var memoryStream = new MemoryStream(web.DownloadData(url)))
+            {
+                web.Headers.Add(HttpRequestHeader.Authorization, $"Bearer {AuthToken}");
+                web.Headers.Add(HttpRequestHeader.Accept, "application/vnd.thetvdb.v1");
+
+                var bytes = web.DownloadData(url);
+                var json = Encoding.UTF8.GetString(bytes);
+
+                using (var memoryStream = new MemoryStream())
+                {
                     return XDocument.Load(memoryStream);
+                }
+            }
         }
     }
 }
