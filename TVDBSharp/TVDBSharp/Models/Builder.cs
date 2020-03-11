@@ -13,7 +13,7 @@ namespace TVDBSharp.Models
     /// </summary>
     public class Builder
     {
-        private const string UriPrefix = "http://thetvdb.com/banners/";
+        
         private readonly IDataProvider _dataProvider;
 
         /// <summary>
@@ -25,21 +25,11 @@ namespace TVDBSharp.Models
             _dataProvider = dataProvider;
         }
 
-        /// <summary>
-        ///     Builds a show object from the given show ID.
-        /// </summary>
-        /// <param name="showID">ID of the show to serialize into a <see cref="Show" /> object.</param>
-        /// <returns>Returns the Show object.</returns>
-        public Show BuildShow(int showID)
-        {
-            var builder = new ShowBuilder(_dataProvider.GetShow(showID));
-            return builder.GetResult();
-        }
-
         public Episode BuildEpisode(int episodeId, string lang)
         {
-            var builder = new EpisodeBuilder(_dataProvider.GetEpisode(episodeId, lang).Descendants("Episode").First());
-            return builder.GetResult();
+            //var builder = new EpisodeBuilder(_dataProvider.GetEpisode(episodeId, lang).Descendants("Episode").First());
+            //return builder.GetResult();
+            return null;
         }
 
         public Updates BuildUpdates(Interval interval)
@@ -59,77 +49,14 @@ namespace TVDBSharp.Models
             var shows = new List<Show>(results);
             var doc = _dataProvider.Search(query);
 
-            foreach (var element in doc.Descendants("Series").Take(results))
-            {
-                var id = int.Parse(element.GetXmlData("seriesid"));
-                var response = _dataProvider.GetShow(id);
-                shows.Add(new ShowBuilder(response).GetResult());
-            }
+            //foreach (var element in doc.Descendants("Series").Take(results))
+            //{
+            //    var id = int.Parse(element.GetXmlData("seriesid"));
+            //    var response = _dataProvider.GetShow(id);
+            //    shows.Add(new ShowBuilder(response).GetResult());
+            //}
 
             return shows;
-        }
-
-        private static Uri GetBannerUri(string uriSuffix)
-        {
-            return new Uri(UriPrefix + uriSuffix, UriKind.Absolute);
-        }
-
-        private class ShowBuilder
-        {
-            private readonly Show _show;
-
-            public ShowBuilder(XDocument doc)
-            {
-                _show = new Show();
-                _show.Id = int.Parse(doc.GetSeriesData("id"));
-                _show.ImdbId = doc.GetSeriesData("IMDB_ID");
-                _show.Name = doc.GetSeriesData("SeriesName");
-                _show.Language = doc.GetSeriesData("Language");
-                _show.Network = doc.GetSeriesData("Network");
-                _show.Description = doc.GetSeriesData("Overview");
-                _show.Rating = string.IsNullOrWhiteSpace(doc.GetSeriesData("Rating"))
-                    ? (double?) null
-                    : Convert.ToDouble(doc.GetSeriesData("Rating"),
-                        System.Globalization.CultureInfo.InvariantCulture);
-                _show.RatingCount = string.IsNullOrWhiteSpace(doc.GetSeriesData("RatingCount"))
-                    ? 0
-                    : Convert.ToInt32(doc.GetSeriesData("RatingCount"));
-                _show.Runtime = string.IsNullOrWhiteSpace(doc.GetSeriesData("Runtime"))
-                    ? (int?) null
-                    : Convert.ToInt32(doc.GetSeriesData("Runtime"));
-                _show.Banner = GetBannerUri(doc.GetSeriesData("banner"));
-                _show.Fanart = GetBannerUri(doc.GetSeriesData("fanart"));
-                _show.LastUpdated = string.IsNullOrWhiteSpace(doc.GetSeriesData("lastupdated"))
-                    ? (long?) null
-                    : Convert.ToInt64(doc.GetSeriesData("lastupdated"));
-                _show.Poster = GetBannerUri(doc.GetSeriesData("poster"));
-                _show.Zap2ItID = doc.GetSeriesData("zap2it_id");
-                _show.FirstAired = string.IsNullOrWhiteSpace(doc.GetSeriesData("FirstAired"))
-                    ? (DateTime?) null
-                    : Utils.ParseDate(doc.GetSeriesData("FirstAired"));
-                _show.AirTime = string.IsNullOrWhiteSpace(doc.GetSeriesData("Airs_Time"))
-                    ? (TimeSpan?) null
-                    : Utils.ParseTime(doc.GetSeriesData("Airs_Time"));
-                _show.AirDay = string.IsNullOrWhiteSpace(doc.GetSeriesData("Airs_DayOfWeek"))
-                    ? (Frequency?) null
-                    : (Frequency) Enum.Parse(typeof (Frequency), doc.GetSeriesData("Airs_DayOfWeek"));
-                _show.Status = string.IsNullOrWhiteSpace(doc.GetSeriesData("Status"))
-                    ? Status.Unknown
-                    : (Status) Enum.Parse(typeof (Status), doc.GetSeriesData("Status"));
-                _show.ContentRating = Utils.GetContentRating(doc.GetSeriesData("ContentRating"));
-                _show.Genres =
-                    new List<string>(doc.GetSeriesData("Genre")
-                        .Split(new[] {'|'}, StringSplitOptions.RemoveEmptyEntries));
-                _show.Actors =
-                    new List<string>(doc.GetSeriesData("Actors")
-                        .Split(new[] {'|'}, StringSplitOptions.RemoveEmptyEntries));
-                _show.Episodes = new EpisodesBuilder(doc).BuildEpisodes();
-            }
-
-            public Show GetResult()
-            {
-                return _show;
-            }
         }
 
         public class EpisodeBuilder
@@ -145,11 +72,11 @@ namespace TVDBSharp.Models
                     Description = episodeNode.GetXmlData("Overview"),
                     EpisodeNumber = int.Parse(episodeNode.GetXmlData("EpisodeNumber")),
                     Director = episodeNode.GetXmlData("Director"),
-                    EpisodeImage = GetBannerUri(episodeNode.GetXmlData("filename")),
-                    FirstAired =
-                        string.IsNullOrWhiteSpace(episodeNode.GetXmlData("FirstAired"))
-                            ? (DateTime?) null
-                            : Utils.ParseDate(episodeNode.GetXmlData("FirstAired")),
+                    //EpisodeImage = GetBannerUri(episodeNode.GetXmlData("filename")),
+                    //FirstAired =
+                    //    string.IsNullOrWhiteSpace(episodeNode.GetXmlData("FirstAired"))
+                    //        ? (DateTime?) null
+                    //        : Utils.ParseDate(episodeNode.GetXmlData("FirstAired")),
                     GuestStars =
                         new List<string>(episodeNode.GetXmlData("GuestStars")
                             .Split(new[] {'|'}, StringSplitOptions.RemoveEmptyEntries)),
@@ -219,45 +146,45 @@ namespace TVDBSharp.Models
         {
             private readonly Updates _updates;
 
-            public UpdatesBuilder(XDocument doc)
+            public UpdatesBuilder(Updates doc)
             {
-                if (doc.Root != null)
-                {
-                    _updates = new Updates
-                    {
-                        Time = int.Parse(doc.Root.Attribute("time").Value),
-                        UpdatedSeries = doc.Root.Elements("Series")
-                            .Select(elt => new UpdatedSerie
-                            {
-                                Id = int.Parse(elt.Element("id").Value),
-                                Time = int.Parse(elt.Element("time").Value)
-                            })
-                            .ToList(),
-                        UpdatedEpisodes = doc.Root.Elements("Episode")
-                            .Select(elt => new UpdatedEpisode
-                            {
-                                Id = int.Parse(elt.Element("id").Value),
-                                SerieId = int.Parse(elt.Element("Series").Value),
-                                Time = int.Parse(elt.Element("time").Value)
-                            })
-                            .ToList(),
-                        UpdatedBanners = doc.Root.Elements("Banner")
-                            .Select(elt => new UpdatedBanner
-                            {
-                                SerieId = int.Parse(elt.Element("Series").Value),
-                                Format = elt.Element("format").Value,
-                                Language =
-                                    elt.Elements("language").Select(n => n.Value).FirstOrDefault() ?? string.Empty,
-                                Path = elt.Element("path").Value,
-                                Type = elt.Element("type").Value,
-                                SeasonNumber = elt.Elements("SeasonNumber").Any()
-                                    ? int.Parse(elt.Element("SeasonNumber").Value)
-                                    : (int?) null,
-                                Time = int.Parse(elt.Element("time").Value)
-                            })
-                            .ToList()
-                    };
-                }
+                //if (doc.Root != null)
+                //{
+                //    _updates = new Updates
+                //    {
+                //        Time = int.Parse(doc.Root.Attribute("time").Value),
+                //        UpdatedSeries = doc.Root.Elements("Series")
+                //            .Select(elt => new UpdatedSerie
+                //            {
+                //                Id = int.Parse(elt.Element("id").Value),
+                //                Time = int.Parse(elt.Element("time").Value)
+                //            })
+                //            .ToList(),
+                //        UpdatedEpisodes = doc.Root.Elements("Episode")
+                //            .Select(elt => new UpdatedEpisode
+                //            {
+                //                Id = int.Parse(elt.Element("id").Value),
+                //                SerieId = int.Parse(elt.Element("Series").Value),
+                //                Time = int.Parse(elt.Element("time").Value)
+                //            })
+                //            .ToList(),
+                //        UpdatedBanners = doc.Root.Elements("Banner")
+                //            .Select(elt => new UpdatedBanner
+                //            {
+                //                SerieId = int.Parse(elt.Element("Series").Value),
+                //                Format = elt.Element("format").Value,
+                //                Language =
+                //                    elt.Elements("language").Select(n => n.Value).FirstOrDefault() ?? string.Empty,
+                //                Path = elt.Element("path").Value,
+                //                Type = elt.Element("type").Value,
+                //                SeasonNumber = elt.Elements("SeasonNumber").Any()
+                //                    ? int.Parse(elt.Element("SeasonNumber").Value)
+                //                    : (int?) null,
+                //                Time = int.Parse(elt.Element("time").Value)
+                //            })
+                //            .ToList()
+                //    };
+                //}
             }
 
             public Updates GetResult()

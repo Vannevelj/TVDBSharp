@@ -6,6 +6,11 @@
     public enum ContentRating
     {
         /// <summary>
+        ///     Default value if no rating is given.
+        /// </summary>
+        Unknown = 0,
+
+        /// <summary>
         ///     Not suitable for children under 14.
         /// </summary>
         TV14,
@@ -33,11 +38,6 @@
         /// <summary>
         ///     This program is specifically designed to be viewed by adults and therefore may be unsuitable for children under 17.
         /// </summary>
-        TVMA,
-
-        /// <summary>
-        ///     Default value if no rating is given.
-        /// </summary>
-        Unknown
+        TVMA        
     }
 }

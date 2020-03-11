@@ -14,30 +14,24 @@ namespace Examples
             Console.WriteLine("{0}:\t{1}", "ID", show.Id);
             Console.WriteLine("{0}:\t{1}", "Language", show.Language);
             Console.WriteLine("{0}:\t{1}", "Last update", show.LastUpdated);
-            Console.WriteLine("{0}:\t{1}", "Name", show.Name);
+            Console.WriteLine("{0}:\t{1}", "Name", show.SeriesName);
             Console.WriteLine("{0}:\t{1}", "Network", show.Network);
             Console.WriteLine("{0}:\t{1}", "Poster", show.Poster);
-            Console.WriteLine("{0}:\t{1}", "Rating", show.Rating);
-            Console.WriteLine("{0}:\t{1}", "# Votes", show.RatingCount);
+            Console.WriteLine("{0}:\t{1}", "Rating", show.SiteRating);
+            Console.WriteLine("{0}:\t{1}", "# Votes", show.SiteRatingCount);
             Console.WriteLine("{0}:\t{1}", "Runtime", show.Runtime);
             Console.WriteLine("{0}:\t{1}", "Status", show.Status);
             Console.WriteLine("{0}:\t{1}", "Zap2it ID", show.Zap2ItID);
-            Console.WriteLine("{0}:\t{1}", "Airday", show.AirDay);
-            Console.WriteLine("{0}:\t{1}", "AirTime", show.AirTime);
+            Console.WriteLine("{0}:\t{1}", "Airday", show.AirsDayOfWeek);
+            Console.WriteLine("{0}:\t{1}", "AirTime", show.AirsTime);
             Console.WriteLine("{0}:\t{1}", "Banner", show.Banner);
-            Console.WriteLine("{0}:\t{1}", "ContentRating", show.ContentRating);
-            Console.WriteLine("{0}:\t{1}", "Description", show.Description);
+            Console.WriteLine("{0}:\t{1}", "ContentRating", show.Rating);
+            Console.WriteLine("{0}:\t{1}", "Description", show.Overview);
             Console.WriteLine("{0}:\t{1}", "Fanart", show.Fanart);
             Console.WriteLine("{0}:\t{1}", "First aired", show.FirstAired);
 
-            Console.Write("Actors:\t");
-            foreach (var element in show.Actors)
-            {
-                Console.Write("{0} | ", element);
-            }
-
             Console.Write("Genres:\t");
-            foreach (var element in show.Genres)
+            foreach (var element in show.Genre)
             {
                 Console.Write("{0} | ", element);
             }

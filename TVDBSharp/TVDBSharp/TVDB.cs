@@ -39,7 +39,7 @@ namespace TVDBSharp
         /// <returns>Returns the corresponding show.</returns>
         public Show GetShow(int showId)
         {
-            return new Builder(_dataProvider).BuildShow(showId);
+            return _dataProvider.GetShow(showId);
         }
 
         /// <summary>

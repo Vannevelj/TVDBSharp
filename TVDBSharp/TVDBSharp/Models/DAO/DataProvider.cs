@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.IO;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
+using TVDBSharp.Models.Deserialization;
 using TVDBSharp.Models.Enums;
 
 namespace TVDBSharp.Models.DAO
@@ -39,27 +39,27 @@ namespace TVDBSharp.Models.DAO
             throw new InvalidOperationException("Unable to retrieve the authentication token");
         }
 
-        public XDocument GetShow(int showID)
+        public Show GetShow(int showID)
         {
-            return GetXDocumentFromUrl($"{BaseUrl}/series/{showID}");
+            return GetResponse<Show>($"{BaseUrl}/series/{showID}");
         }
 
-        public XDocument GetEpisode(int episodeId, string lang)
+        public Episode GetEpisode(int episodeId, string lang)
         {
-            return GetXDocumentFromUrl($"{BaseUrl}/api/{""}/episodes/{episodeId}/{lang}.xml");
+            return GetResponse<Episode>($"{BaseUrl}/api/{""}/episodes/{episodeId}/{lang}.xml");
         }
 
-        public XDocument GetUpdates(Interval interval)
+        public Updates GetUpdates(Interval interval)
         {
-            return GetXDocumentFromUrl($"{BaseUrl}/api/{""}/updates/updates_{IntervalHelpers.Print(interval)}.xml");
+            return GetResponse<Updates>($"{BaseUrl}/api/{""}/updates/updates_{IntervalHelpers.Print(interval)}.xml");
         }
 
-        public XDocument Search(string query)
+        public List<Show> Search(string query)
         {
-            return GetXDocumentFromUrl($"{BaseUrl}/api/GetSeries.php?seriesname={query}&language=all");
+            return GetResponse<List<Show>>($"{BaseUrl}/api/GetSeries.php?seriesname={query}&language=all");
         }
 
-        private XDocument GetXDocumentFromUrl(string url)
+        private T GetResponse<T>(string url)
         {
             using (var web = new WebClient())
             {
@@ -69,10 +69,8 @@ namespace TVDBSharp.Models.DAO
                 var bytes = web.DownloadData(url);
                 var json = Encoding.UTF8.GetString(bytes);
 
-                using (var memoryStream = new MemoryStream())
-                {
-                    return XDocument.Load(memoryStream);
-                }
+                var root = JsonConvert.DeserializeObject<Root<T>>(json);
+                return root.Data;
             }
         }
     }

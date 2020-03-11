@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using TVDBSharp.Models.Deserialization;
 using TVDBSharp.Models.Enums;
 
 namespace TVDBSharp.Models
@@ -20,24 +22,21 @@ namespace TVDBSharp.Models
         public int Id { get; set; }
 
         /// <summary>
-        ///     List of all actors in the show.
-        /// </summary>
-        public List<string> Actors { get; set; }
-
-        /// <summary>
         ///     Day of the week when the show airs.
         /// </summary>
-        public Frequency? AirDay { get; set; }
+        public DayOfWeek? AirsDayOfWeek { get; set; }
 
         /// <summary>
         ///     Time of the day when the show airs.
         /// </summary>
-        public TimeSpan? AirTime { get; set; }
+        [JsonConverter(typeof(TimeConverter))]
+        public TimeSpan? AirsTime { get; set; }
 
         /// <summary>
         ///     Rating of the content provided by an official organ.
         /// </summary>
-        public ContentRating ContentRating { get; set; }
+        [JsonConverter(typeof(ContentRatingConverter))]
+        public ContentRating Rating { get; set; }
 
         /// <summary>
         ///     The date the show aired for the first time.
@@ -47,7 +46,7 @@ namespace TVDBSharp.Models
         /// <summary>
         ///     A list of genres the show is associated with.
         /// </summary>
-        public List<string> Genres { get; set; }
+        public List<string> Genre { get; set; }
 
         /// <summary>
         ///     Main language of the show.
@@ -62,17 +61,17 @@ namespace TVDBSharp.Models
         /// <summary>
         ///     A short overview of the show.
         /// </summary>
-        public string Description { get; set; }
+        public string Overview { get; set; }
 
         /// <summary>
         ///     Average rating as shown on IMDb.
         /// </summary>
-        public double? Rating { get; set; }
+        public double? SiteRating { get; set; }
 
         /// <summary>
         ///     Amount of votes cast.
         /// </summary>
-        public int RatingCount { get; set; }
+        public int SiteRatingCount { get; set; }
 
         /// <summary>
         ///     Let me know if you find out what this is.
@@ -82,7 +81,7 @@ namespace TVDBSharp.Models
         /// <summary>
         ///     Name of the show.
         /// </summary>
-        public string Name { get; set; }
+        public string SeriesName { get; set; }
 
         /// <summary>
         ///     Current status of the show.
@@ -92,11 +91,13 @@ namespace TVDBSharp.Models
         /// <summary>
         ///     Link to the banner image.
         /// </summary>
+        [JsonConverter(typeof(BannerConverter))]
         public Uri Banner { get; set; }
 
         /// <summary>
         ///     Link to a fanart image.
         /// </summary>
+        [JsonConverter(typeof(BannerConverter))]
         public Uri Fanart { get; set; }
 
         /// <summary>
@@ -107,6 +108,7 @@ namespace TVDBSharp.Models
         /// <summary>
         ///     Let me know if you find out what this is.
         /// </summary>
+        [JsonConverter(typeof(BannerConverter))]
         public Uri Poster { get; set; }
 
         /// <summary>
