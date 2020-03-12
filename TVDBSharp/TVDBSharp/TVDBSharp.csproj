@@ -17,6 +17,17 @@
     <PackageId>TVDBSharp</PackageId>
     <Authors>Jeroen Vannevel</Authors>
     <IsPackable>true</IsPackable>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>A C# wrapper for the TVDB API. For more information, go to https://github.com/Vannevelj/TVDBSharp/blob/master/README.md</Description>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/Vannevelj/TVDBSharp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Vannevelj/TVDBSharp</RepositoryUrl>
+    <PackageTags>tvdb, tv, show, series</PackageTags>
+    <PackageReleaseNotes>* Updated to use V3 of the API
+* Package is now released in .netstandard1.6
+* API is async
+* Certain types have had slight adjustments to naming
+* Certain endpoints have been adapted, removed or added</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,6 +40,13 @@
 
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
