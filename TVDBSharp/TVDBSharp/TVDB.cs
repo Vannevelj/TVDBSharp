@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TVDBSharp.Models;
 using TVDBSharp.Models.DAO;
 using TVDBSharp.Models.Enums;
@@ -28,14 +29,14 @@ namespace TVDBSharp
         /// <param name="query">Query that identifies the show.</param>
         /// <param name="results">Maximal amount of results in the returning set. Default is 5.</param>
         /// <returns>Returns a list of shows.</returns>
-        public List<Show> Search(string query) => _dataProvider.Search(query);
+        public Task<List<Show>> Search(string query) => _dataProvider.Search(query);
 
         /// <summary>
         ///     Get a specific show based on its ID.
         /// </summary>
         /// <param name="showId">ID of the show.</param>
         /// <returns>Returns the corresponding show.</returns>
-        public Show GetShow(int showId) => _dataProvider.GetShow(showId);
+        public Task<Show> GetShow(int showId) => _dataProvider.GetShow(showId);
 
         /// <summary>
         /// Get all episodes for a given show, paginated in batches of 100 episodes.
@@ -43,7 +44,7 @@ namespace TVDBSharp
         /// <param name="showId">ID of the show.</param>
         /// <param name="page">The index of the batch</param>
         /// <returns>A list of episodes</returns>
-        public List<Episode> GetEpisodes(int showId, int page = 1) => _dataProvider.GetEpisodes(showId, page);
+        public Task<List<Episode>> GetEpisodes(int showId, int page = 1) => _dataProvider.GetEpisodes(showId, page);
 
         /// <summary>
         /// Get all shows that have been updated since a provided timestamp.
@@ -52,6 +53,6 @@ namespace TVDBSharp
         /// <param name="from">Timestamp from which to retrieve updates</param>
         /// <param name="to">Optional end timestamp</param>
         /// <returns>A list of <see cref="UpdateTimestamp"/></returns>
-        public List<UpdateTimestamp> GetUpdates(DateTime from, DateTime? to = null) => _dataProvider.GetUpdates(from, to ?? from.AddDays(7));
+        public Task<List<UpdateTimestamp>> GetUpdates(DateTime from, DateTime? to = null) => _dataProvider.GetUpdates(from, to ?? from.AddDays(7));
     }
 }

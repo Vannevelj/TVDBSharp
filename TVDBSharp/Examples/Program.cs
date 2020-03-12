@@ -1,68 +1,68 @@
 using System;
-using System.Configuration;
 using System.Linq;
+using System.Threading.Tasks;
 using TVDBSharp;
 
 namespace Examples
 {
     internal class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             // Your own API key
-            var tvdb = new TVDB(ConfigurationManager.AppSettings["apikey"]);
+            var tvdb = new TVDB("apikey");
 
             // Retrieve and display Game of Thrones
-            //GetSpecificShow(tvdb);
+            await GetSpecificShow(tvdb);
 
             // Retrieve and display episode titles for Game of Thrones season 2
-            //GetEpisodeTitlesForSeason(tvdb);
+            await GetEpisodeTitlesForSeason(tvdb);
 
             // Search for Battlestar Galactica on tvdb
-            //SearchShow(tvdb);
+            await SearchShow(tvdb);
 
             // Get updates of the last 24 hours
-            GetUpdates(tvdb);
+            await GetUpdates(tvdb);
 
             Console.ReadKey();
         }
 
-        private static void GetSpecificShow(TVDB tvdb)
+        private static async Task GetSpecificShow(TVDB tvdb)
         {
             Console.WriteLine("Game of Thrones");
-            var got = tvdb.GetShow(121361);
+            var got = await tvdb.GetShow(121361);
             DisplayShowDetails.Print(got);
 
-            var eps = tvdb.GetEpisodes(121361);
+            var eps = await tvdb.GetEpisodes(121361);
             DisplayEpisodeDetails.Print(eps.First());
 
             Console.WriteLine("-----------");
         }
 
-        private static void GetEpisodeTitlesForSeason(TVDB tvdb)
+        private static async Task GetEpisodeTitlesForSeason(TVDB tvdb)
         {
             Console.WriteLine("Episodes of Game of Thrones season 2");
-            var episodes = tvdb.GetEpisodes(121361);
+            var episodes = await tvdb.GetEpisodes(121361);
             var season2Episodes = episodes.Where(ep => ep.AiredSeason == 2).ToList();
             DisplayEpisodeTitles.Print(season2Episodes);
             Console.WriteLine("-----------");
         }
 
-        private static void SearchShow(TVDB tvdb)
+        private static async Task SearchShow(TVDB tvdb)
         {
             Console.WriteLine("Search for Battlestar Galactica on tvdb");
-            var searchResults = tvdb.Search("Battlestar Galactica");
+            var searchResults = await tvdb.Search("Battlestar Galactica");
             DisplaySearchResult.Print(searchResults);
             Console.WriteLine("-----------");
         }
 
-        private static void GetUpdates(TVDB tvdb)
+        private static async Task GetUpdates(TVDB tvdb)
         {
             var beginTime = new DateTime(2019, 12, 10);
-            Console.WriteLine($"Updates during the last 24 hours on thetvdb, since {beginTime}");
+            Console.WriteLine($"Updates in the 7 days since {beginTime}");
 
-            var updates = tvdb.GetUpdates(beginTime);
-            DisplayUpdates.Print(updates);
+            var updates = await tvdb.GetUpdates(beginTime);
+            DisplayUpdates.Print(updates.Take(20).ToList());
             Console.WriteLine("-----------");
         }
     }
