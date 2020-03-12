@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TVDBSharp.Models.Deserialization;
 using TVDBSharp.Models.Enums;
+using TVDBSharp.Utilities;
 
 namespace TVDBSharp.Models.DAO
 {
@@ -39,30 +40,13 @@ namespace TVDBSharp.Models.DAO
             throw new InvalidOperationException("Unable to retrieve the authentication token");
         }
 
-        public Show GetShow(int showID)
-        {
-            return GetResponse<Show>($"{BaseUrl}/series/{showID}");
-        }
+        public Show GetShow(int showID) => GetResponse<Show>($"{BaseUrl}/series/{showID}");
 
-        public List<Episode> GetEpisodes(int showId)
-        {
-            return GetResponse<List<Episode>>($"{BaseUrl}/series/{showId}/episodes");
-        }
+        public List<Episode> GetEpisodes(int showId, int page) => GetResponse<List<Episode>>($"{BaseUrl}/series/{showId}/episodes?page={page}");
 
-        public Episode GetEpisode(int episodeId, string lang)
-        {
-            return GetResponse<Episode>($"{BaseUrl}/api/{""}/episodes/{episodeId}/{lang}.xml");
-        }
+        public List<UpdateTimestamp> GetUpdates(DateTime from, DateTime to) => GetResponse<List<UpdateTimestamp>>($"{BaseUrl}/updated/query?fromTime={from.ToEpoch()}&toTime={to.ToEpoch()}");
 
-        public Updates GetUpdates(Interval interval)
-        {
-            return GetResponse<Updates>($"{BaseUrl}/api/{""}/updates/updates_{IntervalHelpers.Print(interval)}.xml");
-        }
-
-        public List<Show> Search(string query)
-        {
-            return GetResponse<List<Show>>($"{BaseUrl}/api/GetSeries.php?seriesname={query}&language=all");
-        }
+        public List<Show> Search(string query) => GetResponse<List<Show>>($"{BaseUrl}/search/series?name={query}");
 
         private T GetResponse<T>(string url)
         {

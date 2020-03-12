@@ -1,7 +1,9 @@
-﻿using System;
+using System;
 using System.Configuration;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using TVDBSharp;
 using TVDBSharp.Models.Enums;
 
@@ -15,10 +17,7 @@ namespace Examples
             var tvdb = new TVDB(ConfigurationManager.AppSettings["apikey"]);
 
             // Retrieve and display Game of Thrones
-            GetSpecificShow(tvdb);
-
-            // Retrieve and display Game of Thrones s04e01
-            //GetSpecificEpisode(tvdb);
+            //GetSpecificShow(tvdb);
 
             // Retrieve and display episode titles for Game of Thrones season 2
             //GetEpisodeTitlesForSeason(tvdb);
@@ -27,7 +26,7 @@ namespace Examples
             //SearchShow(tvdb);
 
             // Get updates of the last 24 hours
-            //GetUpdates(tvdb);
+            GetUpdates(tvdb);
 
             Console.ReadKey();
         }
@@ -41,14 +40,6 @@ namespace Examples
             var eps = tvdb.GetEpisodes(121361);
             DisplayEpisodeDetails.Print(eps.First());
 
-            Console.WriteLine("-----------");
-        }
-
-        private static void GetSpecificEpisode(TVDB tvdb)
-        {
-            Console.WriteLine("Game of Thrones s04e01");
-            var episode = tvdb.GetEpisode(4721938);
-            DisplayEpisodeDetails.Print(episode);
             Console.WriteLine("-----------");
         }
 
@@ -71,9 +62,12 @@ namespace Examples
 
         private static void GetUpdates(TVDB tvdb)
         {
-            var updates = tvdb.GetUpdates(Interval.Day);
-            Console.WriteLine("Updates during the last 24 hours on thetvdb, since {0}", updates.Timestamp);
+            var beginTime = new DateTime(2019, 12, 10);
+            Console.WriteLine($"Updates during the last 24 hours on thetvdb, since {beginTime}");
+
+            var updates = tvdb.GetUpdates(beginTime);
             DisplayUpdates.Print(updates);
+            Console.WriteLine("-----------");
         }
     }
 }

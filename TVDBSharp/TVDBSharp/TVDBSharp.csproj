@@ -49,11 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Builder.cs" />
     <Compile Include="Models\DAO\DataProvider.cs" />
     <Compile Include="Models\DAO\IDataProvider.cs" />
     <Compile Include="Models\Deserialization\BannerConverter.cs" />
     <Compile Include="Models\Deserialization\ContentRatingConverter.cs" />
+    <Compile Include="Models\Deserialization\EpochConverter.cs" />
     <Compile Include="Models\Deserialization\Root.cs" />
     <Compile Include="Models\Deserialization\TimeConverter.cs" />
     <Compile Include="Models\Enums\ContentRating.cs" />

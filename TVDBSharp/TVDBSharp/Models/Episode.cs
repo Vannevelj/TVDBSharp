@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using TVDBSharp.Models.Deserialization;
@@ -19,11 +19,6 @@ namespace TVDBSharp.Models
         ///     Directors for the episode.
         /// </summary>
         public List<string> Directors { get; set; }
-
-        /// <summary>
-        ///     Writers for the episode.
-        /// </summary>
-        public List<string> Writers { get; set; }
 
         /// <summary>
         ///     This episode's title.

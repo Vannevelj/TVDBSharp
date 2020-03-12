@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using TVDBSharp.Models;
 using TVDBSharp.Models.DAO;
 using TVDBSharp.Models.Enums;
@@ -27,45 +28,30 @@ namespace TVDBSharp
         /// <param name="query">Query that identifies the show.</param>
         /// <param name="results">Maximal amount of results in the returning set. Default is 5.</param>
         /// <returns>Returns a list of shows.</returns>
-        public List<Show> Search(string query, int results = 5)
-        {
-            return new Builder(_dataProvider).Search(query, results);
-        }
+        public List<Show> Search(string query) => _dataProvider.Search(query);
 
         /// <summary>
         ///     Get a specific show based on its ID.
         /// </summary>
         /// <param name="showId">ID of the show.</param>
         /// <returns>Returns the corresponding show.</returns>
-        public Show GetShow(int showId)
-        {
-            return _dataProvider.GetShow(showId);
-        }
+        public Show GetShow(int showId) => _dataProvider.GetShow(showId);
 
         /// <summary>
-        /// Get all episodes for a given show
+        /// Get all episodes for a given show, paginated in batches of 100 episodes.
         /// </summary>
         /// <param name="showId">ID of the show.</param>
+        /// <param name="page">The index of the batch</param>
         /// <returns>A list of episodes</returns>
-        public List<Episode> GetEpisodes(int showId)
-        {
-            return _dataProvider.GetEpisodes(showId);
-        }
+        public List<Episode> GetEpisodes(int showId, int page = 1) => _dataProvider.GetEpisodes(showId, page);
 
         /// <summary>
-        ///     Get a specific episode based on its ID.
+        /// Get all shows that have been updated since a provided timestamp.
+        /// You may optionally pass in an end time as well but any time difference beyond 7 days will be automatically reduced to a week.
         /// </summary>
-        /// <param name="episodeId">ID of the episode</param>
-        /// <param name="lang">ISO 639-1 language code for the episode</param>
-        /// <returns>The corresponding episode</returns>
-        public Episode GetEpisode(int episodeId, string lang = "en")
-        {
-            return new Builder(_dataProvider).BuildEpisode(episodeId, lang);
-        }
-
-        public Updates GetUpdates(Interval interval)
-        {
-            return new Builder(_dataProvider).BuildUpdates(interval);
-        }
+        /// <param name="from">Timestamp from which to retrieve updates</param>
+        /// <param name="to">Optional end timestamp</param>
+        /// <returns>A list of <see cref="UpdateTimestamp"/></returns>
+        public List<UpdateTimestamp> GetUpdates(DateTime from, DateTime? to = null) => _dataProvider.GetUpdates(from, to ?? from.AddDays(7));
     }
 }
