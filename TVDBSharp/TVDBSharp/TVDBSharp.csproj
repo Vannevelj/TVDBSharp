@@ -57,7 +57,6 @@
     <Compile Include="Models\Deserialization\Root.cs" />
     <Compile Include="Models\Deserialization\TimeConverter.cs" />
     <Compile Include="Models\Enums\ContentRating.cs" />
-    <Compile Include="Models\Enums\Interval.cs" />
     <Compile Include="Models\Enums\Status.cs" />
     <Compile Include="Models\Episode.cs" />
     <Compile Include="Models\Show.cs" />
