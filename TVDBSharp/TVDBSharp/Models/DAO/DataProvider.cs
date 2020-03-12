@@ -3,10 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using TVDBSharp.Models.Deserialization;
-using TVDBSharp.Models.Enums;
 using TVDBSharp.Utilities;
 
 namespace TVDBSharp.Models.DAO
@@ -50,15 +50,15 @@ namespace TVDBSharp.Models.DAO
 
         private T GetResponse<T>(string url)
         {
-            using (var web = new WebClient())
+            using (var web = new HttpClient())
             {
-                web.Headers.Add(HttpRequestHeader.Authorization, $"Bearer {AuthToken}");
-                web.Headers.Add(HttpRequestHeader.Accept, "application/vnd.thetvdb.v3");
+                web.DefaultRequestHeaders.Add("Authorization", $"Bearer {AuthToken}");
+                web.DefaultRequestHeaders.Add("Accept", "application/vnd.thetvdb.v3");
 
-                var bytes = web.DownloadData(url);
-                var json = Encoding.UTF8.GetString(bytes);
+                var json = web.GetAsync(url).Result;
+                var content = json.Content.ReadAsStringAsync().Result;
 
-                var root = JsonConvert.DeserializeObject<Root<T>>(json);
+                var root = JsonConvert.DeserializeObject<Root<T>>(content);
                 return root.Data;
             }
         }
