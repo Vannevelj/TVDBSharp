@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <VersionPrefix>3.0.1</VersionPrefix>
-    <FileVersion>3.0.1</FileVersion>
+    <VersionPrefix>3.1.0</VersionPrefix>
+    <FileVersion>3.1.0</FileVersion>
     <!-- The AssemblyVersion should only be updated on a Major version bump -->
     <AssemblyVersion>3.0.0.0</AssemblyVersion>
 
@@ -23,7 +23,7 @@
     <PackageProjectUrl>https://github.com/Vannevelj/TVDBSharp</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Vannevelj/TVDBSharp</RepositoryUrl>
     <PackageTags>tvdb, tv, show, series</PackageTags>
-    <PackageReleaseNotes>* Fixed a crash when trying to deserialize an "Upcoming" status</PackageReleaseNotes>
+    <PackageReleaseNotes>* Added the AbsoluteNumber field to an Episode</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

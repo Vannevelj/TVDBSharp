@@ -101,5 +101,10 @@ namespace TVDBSharp.Models
         ///     Width dimension of the thumbnail in pixels;
         /// </summary>
         public int? ThumbWidth { get; set; }
+
+        /// <summary>
+        /// Absolute episode number
+        /// </summary>
+        public int? AbsoluteNumber { get; set; }
     }
 }
