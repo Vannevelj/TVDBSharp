@@ -1,8 +1,6 @@
 TVDBSharp
 =========
 
-Now also available as a NuGet package at https://www.nuget.org/packages/TVDBSharp/
-
 **A C# wrapper for the TVDB API.**
 
 This API provides an easy-to-use interface to the TVDB API by translating the XML responses into objects. 
@@ -14,19 +12,18 @@ To get started there are a few steps you have to undertake.
 This is as easy as filling out a form on TheTVDB's webpage. 
 Read the rules and enter your information, you can find your API key under 'Account'.
 
-> http://thetvdb.com/?tab=apiregister
+> https://thetvdb.com/api-information
 
 **2) Optionally: familiarize yourself with the API itself.**  
 You don't have to do this, but some people might want to read up on the, although slightly outdated, API.
 
-> http://www.thetvdb.com/wiki/index.php?title=Programmers_API
+> https://api.thetvdb.com/swagger
 
 **3) Import the library.**  
 This can be done by either forking this repository and compiling it yourself 
 or by downloading the latest version from the link below.
 
-> https://mega.co.nz/#!ldV2mByK!ThyK-hbqHXWGnLcKbjtrcxQv46rF_V6tghtE9ZWELEU
-
+> Install the Nuget package at https://www.nuget.org/packages/TVDBSharp/
 
 Add it as a reference to your project and you're all set.
 
