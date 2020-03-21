@@ -1,4 +1,4 @@
-﻿namespace TVDBSharp.Models.Enums
+namespace TVDBSharp.Models.Enums
 {
     /// <summary>
     ///     Describes the current status of a show.
@@ -6,18 +6,23 @@
     public enum Status
     {
         /// <summary>
+        ///     Default value if no status is specified.
+        /// </summary>
+        Unknown = 0,
+
+        /// <summary>
         ///     No more episodes are being released.
         /// </summary>
-        Ended,
+        Ended = 1,
 
         /// <summary>
         ///     The show is ongoing.
         /// </summary>
-        Continuing,
+        Continuing = 2,
 
         /// <summary>
-        ///     Default value if no status is specified.
+        /// The show has yet to start.
         /// </summary>
-        Unknown
+        Upcoming = 3
     }
 }

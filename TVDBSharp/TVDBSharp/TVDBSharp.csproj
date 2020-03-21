@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <VersionPrefix>3.0.0</VersionPrefix>
-    <FileVersion>3.0.0</FileVersion>
+    <VersionPrefix>3.0.1</VersionPrefix>
+    <FileVersion>3.0.1</FileVersion>
     <!-- The AssemblyVersion should only be updated on a Major version bump -->
     <AssemblyVersion>3.0.0.0</AssemblyVersion>
 
@@ -23,11 +23,7 @@
     <PackageProjectUrl>https://github.com/Vannevelj/TVDBSharp</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Vannevelj/TVDBSharp</RepositoryUrl>
     <PackageTags>tvdb, tv, show, series</PackageTags>
-    <PackageReleaseNotes>* Updated to use V3 of the API
-* Package is now released in .netstandard1.6
-* API is async
-* Certain types have had slight adjustments to naming
-* Certain endpoints have been adapted, removed or added</PackageReleaseNotes>
+    <PackageReleaseNotes>* Fixed a crash when trying to deserialize an "Upcoming" status</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
