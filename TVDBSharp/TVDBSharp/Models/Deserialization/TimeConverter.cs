@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 
 namespace TVDBSharp.Models.Deserialization
@@ -14,10 +14,9 @@ namespace TVDBSharp.Models.Deserialization
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            DateTime date;
             var value = (string)reader.Value;
 
-            if (!DateTime.TryParse(value, out date))
+            if (!DateTime.TryParse(value, out var date))
             {
                 return new TimeSpan();
             }

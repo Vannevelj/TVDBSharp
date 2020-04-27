@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using TVDBSharp.Models.Deserialization;
@@ -22,9 +22,11 @@ namespace TVDBSharp.Models
         public int Id { get; set; }
 
         /// <summary>
-        ///     Day of the week when the show airs.
+        ///     Day of the week when the show airs. If you're interested in a week day, make sure to check both
+        ///     individual days (e.g. <see cref="Enums.DayOfWeek.Monday"/>) as well as <see cref="Enums.DayOfWeek.Weekdays"/>
         /// </summary>
-        public DayOfWeek? AirsDayOfWeek { get; set; }
+        [JsonConverter(typeof(WeekdayConverter))]
+        public Enums.DayOfWeek? AirsDayOfWeek { get; set; }
 
         /// <summary>
         ///     Time of the day when the show airs.
